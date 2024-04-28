@@ -1,0 +1,30 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-grid_align-spread">
+                <div class="container2 slds-col">
+                    <p style="font-size:16px; margin-left: 5px;"><lightning-icon icon-name="standard:asset_warranty"
+                                                                                 size="small"></lightning-icon><strong>   {label.Assets} ({assetCount})</strong></p>
+                </div>
+                <div class="slds-col">
+                    <input type="text" class="search-input" placeholder={label.searchPlaceholder}
+                           oninput={handleSearch} />
+                    <template lwc:if={havePermission}>
+                        <lightning-button label="VoC" variant="brand" onclick={doVoc}>
+                        </lightning-button>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div style="height: 300px; overflow-y: auto;">
+            <template if:true={processedAssets}>
+                <lightning-datatable key-field="Id" data={processedAssets} columns={columns}
+                                     onrowaction={navigateToRecord} onrowselection={getSelectedName} max-row-selection="1" column-widths-mode="auto">
+                </lightning-datatable>
+            </template>
+        </div>
+        <template if:true={assets.error}>
+            <p>An error has occurred while fetching assets.</p>
+        </template>
+    </lightning-card>
+</template>

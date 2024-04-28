@@ -1,0 +1,95 @@
+<template>
+    <lightning-card class="slds-card_boundary">
+        <div slot="title" class="slds-media slds-media_center slds-align_absolute-center">
+            <div class="slds-media__figure">
+                <lightning-icon icon-name="custom:custom93" size="small"></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                <h1 class="slds-card__header-title">
+                    {label.CreateanOrder}
+                </h1>
+            </div>
+        </div>
+        <div class="refresh_btn">
+            <lightning-button-icon icon-name="utility:refresh" alternative-text={label.Refresh} title={label.Refresh}
+                onclick={refreshComponentData}></lightning-button-icon>
+        </div>
+        <div class="slds-m-around_medium custom-margin-top">
+            <lightning-combobox options={opportunityOptions} value={selectedOpportunityId}
+                onchange={handleOpportunityChange} placeholder={label.selectConsultation}
+                hide-checkbox-column="true"></lightning-combobox>
+            <lightning-datatable data={opportunityProducts} columns={columns} key-field="id" hide-checkbox-column="true"
+                onrowaction={handleRowAction} column-widths-mode="auto"></lightning-datatable>
+            <div class="button-container slds-m-top_medium slds-align_absolute-center slds-grid slds-justify-center">
+                <lightning-button label={label.addProduct} onclick={handleAddProductClick} variant="brand"
+                    disabled={isAddButtonDisabled}></lightning-button>
+            </div>
+            <lightning-input label={label.DiscountRateA} type="number" value={discountRate} onchange={handleDiscountRateChange}
+                min="0" max="20" step="1" message-when-range-overflow={label.MaxDiscountRate}
+                message-when-range-underflow={label.MinDiscountRate} formatter="decimal"></lightning-input>
+            <div class="boxMoney slds-m-top_medium slds-p-around_medium slds-box slds-theme_default">
+                <p class="slds-text-title_bold">{label.TotalPrice}: {formattedTotalAmount}</p>
+                <br>
+                <p class="slds-text-title_bold" aria-placeholder="0">{label.DiscoutAmount}: - {formattedDiscountMoney}</p>
+                <hr />
+                <p class="slds-text-title_bold">{label.FinalPrice}: {formattedDiscountedAmount}</p>
+            </div>
+            <lightning-input type="date" label={label.OrderDateA} value={orderDate} onchange={handleDateChange}
+                min={minDate}></lightning-input>
+            <!-- yourComponent.html -->
+            <lightning-combobox name="paymentInput" label={label.PaymentMethod} value={selectedValue} placeholder={label.SelectPayment}
+                options={paymentOptions} onchange={handleChange}></lightning-combobox>
+            <lightning-input type="text" name="description" label={label.OrderDescription} value={description}
+                onchange={handleInputChange}></lightning-input>
+            <div class="button-container slds-m-top_medium slds-align_absolute-center">
+                <lightning-button variant="brand" label={label.CreateOrder} onclick={handleCreateOrder}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+    <!-- 모달 창 -->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- 모달 헤더 -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{label.SelectProduct}</h2>
+                </header>
+                <!-- 모달 본문 -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-form-element">
+                        <!-- Edit 모드가 아닐 때만 제품 선택 옵션을 보여줍니다. -->
+                        <template if:false={isEditMode}>
+                            <lightning-combobox name="productSelect" label={label.SelectProduct} value={selectedProductId}
+                                placeholder={label.SelectAProduct} options={productOptions} onchange={handleProductChange}
+                                class="slds-m-bottom_medium"></lightning-combobox>
+                        </template>
+                        <lightning-input type="number" name="quantityInput" label={label.QuantityA} value={selectedQuantity}
+                            onchange={handleQuantityChange} min="1" max="100" step="1" class="slds-m-bottom_medium"></lightning-input>
+                    </div>
+                    <!-- Edit 모드가 아닐 때만 제품 정보를 보여줍니다. -->
+                    <template if:false={isEditMode}>
+                        <div class="slds-box slds-theme_default slds-theme_shade slds-m-top_medium">
+                            <p><strong>{label.ProductName}:</strong> {selectedProductDetails.Name}</p>
+                            <p><strong>{label.ProductCode}:</strong> {selectedProductDetails.ProductCode}</p>
+                            <p><strong>{label.ProductFamily}:</strong> {selectedProductDetails.Family}</p>
+                            <p class="slds-text-color_success"><strong>{label.UnitPriceA}:</strong> {selectedProductPrice}</p>
+                        </div>
+                    </template>
+                </div>
+                <!-- 모달 푸터 -->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label={label.Cancellation} onclick={closeModal}></lightning-button>
+                    <lightning-button variant="brand" label={label.Save} onclick={saveProduct}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

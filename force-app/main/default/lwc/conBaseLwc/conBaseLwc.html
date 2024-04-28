@@ -1,0 +1,31 @@
+<template>
+    <div class="slds-p-around_small">
+        <lightning-layout horizontal-align="spread">
+            <lightning-layout-item size="9" >
+                <lightning-input type="tel" placeholder={label.Enter_phone_number} value={phoneNum} pattern="[0-9\-]{1,12}" onchange={phoneChangeHandler} onkeypress={pressEnter} variant="label-hidden"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item size="3">
+                <lightning-button variant="brand" label={label.Search} onclick={doSearch} class="slds-p-left_x-small"></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="slds-p-top_small">
+            <template lwc:if={result}>
+                <template for:each={result} for:item="contact">
+                    <lightning-card key={contact.Id}>
+                        <h3 slot="title">
+                            <lightning-icon icon-name="standard:contact" size="small" ></lightning-icon>
+                            <a class="slds-p-left_x-small" onclick={doOpen} data-record-id={contact.Id}>
+                                {contact.Name}
+                            </a>
+                        </h3>
+                        <p class="slds-p-horizontal_small"><b>{label.typeInCard}</b> {contact.Type__c}</p>
+                        <p class="slds-p-horizontal_small"><b>{label.Phone}</b> {contact.Phone}</p>
+                    </lightning-card>
+                </template>
+            </template>
+            <template lwc:if={error}>
+                <p class="slds-text-align_center">{label.ErrorSearchMessage}</p>
+            </template>
+        </div>
+    </div>
+</template>
