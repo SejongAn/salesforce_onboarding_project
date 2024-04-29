@@ -1,3 +1,16 @@
+/*
+*******************************************************************************
+  * File Name   : orderCreate.js
+  * Description : orderCreate in js 
+  * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+  * Author      : i2max
+  * Modification Log
+  * ===============================================================
+  * Ver  Date        Author            Modification
+  * ===============================================================
+  * 1.0  2024.04.26  JaeHwan Lee        Create
+********************************************************************************
+*/
 import { api, LightningElement, track, wire } from "lwc";
 import getOpportunities from "@salesforce/apex/OrderCreate.getOpportunities";
 import getOpportunityProducts from "@salesforce/apex/OrderCreate.getOpportunityProducts";

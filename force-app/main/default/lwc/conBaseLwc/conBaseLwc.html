@@ -2,19 +2,19 @@
     <div class="slds-p-around_small">
         <lightning-layout horizontal-align="spread">
             <lightning-layout-item size="9" >
-                <lightning-input type="tel" placeholder={label.Enter_phone_number} value={phoneNum} pattern="[0-9\-]{1,12}" onchange={phoneChangeHandler} onkeypress={pressEnter} variant="label-hidden"></lightning-input>
+                <lightning-input type="tel" placeholder={label.Enter_phone_number} value={phoneNum} pattern="[0-9\-]{1,12}" onchange={gfn_phoneChange} onkeypress={gfn_pressEnter} variant="label-hidden"></lightning-input>
             </lightning-layout-item>
             <lightning-layout-item size="3">
                 <lightning-button variant="brand" label={label.Search} onclick={doSearch} class="slds-p-left_x-small"></lightning-button>
             </lightning-layout-item>
         </lightning-layout>
-        <div class="slds-p-top_small">
+        <div class="slds-p-top_small slds-scrollable_y" style="height:200px">
             <template lwc:if={result}>
                 <template for:each={result} for:item="contact">
                     <lightning-card key={contact.Id}>
                         <h3 slot="title">
                             <lightning-icon icon-name="standard:contact" size="small" ></lightning-icon>
-                            <a class="slds-p-left_x-small" onclick={doOpen} data-record-id={contact.Id}>
+                            <a class="slds-p-left_x-small" onclick={fn_open} data-record-id={contact.Id}>
                                 {contact.Name}
                             </a>
                         </h3>

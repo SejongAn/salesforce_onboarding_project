@@ -1,3 +1,14 @@
+/*******************************************************************************
+* File Name   : CaseController
+        * Description : CaseController
+* Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+* Author      : i2max
+* Modification Log
+* ===============================================================
+* Ver  Date        Author            Modification
+* ===============================================================
+* 1.0  2024.04.24  Yeongeun Kim     create
+********************************************************************************/
 public with sharing class CaseController {
     //해당 asset에 related 된 case가 있는지 확인
     @AuraEnabled(Cacheable=true)

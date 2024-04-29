@@ -1,8 +1,8 @@
-global class OrderQueryBatch implements Database.Batchable<sObject>, Database.Stateful {
+global class OrderQueryBatch_ba implements Database.Batchable<sObject>{
 /*
 *******************************************************************************
-  * File Name   : OrderQueryBatch.cls
-  * Description : OrderQueryBatch in cls 
+  * File Name   : OrderQueryBatch_ba.cls
+  * Description : OrderQueryBatch_ba in cls 
   * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
   * Author      : i2max
   * Modification Log
@@ -87,6 +87,6 @@ global class OrderQueryBatch implements Database.Batchable<sObject>, Database.St
     }
 
     global void finish(Database.BatchableContext BC) {
-        // 배치 작업 완료 후 필요한 후처리 작업 수행 (예: 알림 발송)
+        
     }
 }

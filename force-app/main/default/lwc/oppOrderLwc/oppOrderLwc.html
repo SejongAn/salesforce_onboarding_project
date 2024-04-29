@@ -1,0 +1,18 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium">
+            <lightning-layout>
+                    <p style="font-size:14px; margin-left: 5px;">
+                        <lightning-icon icon-name="standard:orders"
+                                        size="small"></lightning-icon>
+                        <strong> Orders ({orderCount})</strong></p>
+            </lightning-layout>
+        </div>
+        <lightning-datatable
+                key-field="id"
+                data={orders}
+                columns={columns}
+                onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </lightning-card>
+</template>

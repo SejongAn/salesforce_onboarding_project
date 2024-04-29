@@ -1,5 +1,17 @@
+/*
+*******************************************************************************
+  * File Name   : OrderCreate.cls
+  * Description : OrderCreate in cls 
+  * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+  * Author      : i2max
+  * Modification Log
+  * ===============================================================
+  * Ver  Date        Author            Modification
+  * ===============================================================
+  * 1.0  2024.04.27  JaeHwan Lee        Create
+********************************************************************************
+*/
 public with sharing class OrderCreate {
-    
     // 특정 고객 연결된 상담 단계에 있는 Opportunity 목록을 검색
     @AuraEnabled(cacheable=true)
     public static List<Opportunity> getOpportunities(Id contactId) {

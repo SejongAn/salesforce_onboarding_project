@@ -1,0 +1,19 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-grid_align-spread">
+                <div class="container2 slds-col">
+                    <p style="font-size:14px; margin-left: 5px;">
+                        <lightning-icon icon-name="standard:asset_object"
+                                        size="small"></lightning-icon>
+                        <strong> {label.Assets} ({assetCount})</strong></p>
+                </div>
+            </div>
+        </div>
+        <lightning-datatable
+                key-field="id"
+                data={assets}
+                columns={columns}>
+        </lightning-datatable>
+    </lightning-card>
+</template>

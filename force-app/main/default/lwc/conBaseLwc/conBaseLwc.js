@@ -19,12 +19,12 @@ export default class ConBaseLwc extends NavigationMixin(LightningElement) {
     };
 
     //사용자의 입력값 저장
-    phoneChangeHandler(event) {
+    gfn_phoneChange(event) {
         this.phoneNum = event.target.value;
     }
 
     //input에서 입력후 enter 눌렀을 때 검색 function 호출
-    pressEnter(event) {
+    gfn_pressEnter(event) {
         if (event.keyCode === 13) {
             this.doSearch();
         }
@@ -58,7 +58,7 @@ export default class ConBaseLwc extends NavigationMixin(LightningElement) {
     }
 
     //해당 contact 레코드로 이동
-    doOpen(event) {
+    fn_open(event) {
         const contactId = event.target.dataset.recordId;
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',

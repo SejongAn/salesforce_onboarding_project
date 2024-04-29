@@ -1,144 +1,59 @@
 public with sharing class OppTopProductController {
 
-    @AuraEnabled(cacheable=true)
-    public static List<Product2> getTopLaptopKOR() {
-        // Asset에 연결된 Product를 카운트 하여 판매대수 상위 노트북을 조회합니다.
-        List<AggregateResult> Top5Laptop = [
-                SELECT Product2Id, COUNT(Id) quantity
-                FROM Asset
-                WHERE Refund_availability__c = false AND Product2.Family='laptop' AND Account.Type ='KOR'
-                GROUP BY Product2Id
-                ORDER BY COUNT(Id) DESC
-                LIMIT 5
-        ];
+    public class ProductInfo {
+        @AuraEnabled public Id Id { get; set; }
+        @AuraEnabled public String Name { get; set; }
+        @AuraEnabled public Decimal Price { get; set; }
 
-        // Product2Id 리스트를 생성합니다.
-        List<Id> topLaptopIds = new List<Id>();
-        for (AggregateResult ar : Top5Laptop) {
-            topLaptopIds.add((Id)ar.get('Product2Id'));
+        public ProductInfo(Id id, String name, Decimal price) {
+            this.Id = id;
+            this.Name = name;
+            this.Price = price;
         }
-
-        // 상위 5개의 Product2Id 순서대로 Product2 레코드를 조회합니다.
-        Map<Id, Product2> productsMap = new Map<Id, Product2>(
-                [SELECT Id, Name, (SELECT Price FROM Assets LIMIT 1) FROM Product2 WHERE Id IN :topLaptopIds]
-        );
-
-        // 정렬된 순서를 유지하기 위해 리스트를 생성합니다.
-        List<Product2> topLaptopKOR = new List<Product2>();
-        for (Id productId : topLaptopIds) {
-            Product2 product = productsMap.get(productId);
-            if (product != null) {
-                topLaptopKOR.add(product);
-            }
-        }
-
-        return topLaptopKOR;
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<Product2> getTopLaptopUS() {
-        // Asset에 연결된 Product를 카운트 하여 판매대수 상위 노트북을 조회합니다.
-        List<AggregateResult> Top5Laptop = [
+    public static List<ProductInfo> getTopProducts(String productFamily, String accountType) {
+        List<AggregateResult> topProducts = [
                 SELECT Product2Id, COUNT(Id) quantity
                 FROM Asset
-                WHERE Refund_availability__c = false AND Product2.Family='laptop' AND Account.Type ='US'
+                WHERE Refund_availability__c = false AND Product2.Family=:productFamily AND Account.Type =:accountType
                 GROUP BY Product2Id
                 ORDER BY COUNT(Id) DESC
                 LIMIT 5
         ];
 
-        // Product2Id 리스트를 생성합니다.
-        List<Id> topLaptopIds = new List<Id>();
-        for (AggregateResult ar : Top5Laptop) {
-            topLaptopIds.add((Id)ar.get('Product2Id'));
+        List<Id> topProductIds = new List<Id>();
+        for (AggregateResult ar : topProducts) {
+            topProductIds.add((Id)ar.get('Product2Id'));
         }
 
-        // 상위 5개의 Product2Id 순서대로 Product2 레코드를 조회합니다.
-        Map<Id, Product2> productsMap = new Map<Id, Product2>(
-                [SELECT Id, Name, (SELECT Price FROM Assets LIMIT 1) FROM Product2 WHERE Id IN :topLaptopIds]
-        );
+        List<Product2> products = [SELECT Id, Name FROM Product2 WHERE Id IN :topProductIds];
 
-        // 정렬된 순서를 유지하기 위해 리스트를 생성합니다.
-        List<Product2> topLaptopUS = new List<Product2>();
-        for (Id productId : topLaptopIds) {
-            Product2 product = productsMap.get(productId);
-            if (product != null) {
-                topLaptopUS.add(product);
-            }
+        Map<Id, Decimal> productPrices = new Map<Id, Decimal>();
+        String currencyCode = UserInfo.getDefaultCurrency();
+        for (PriceBookEntry pbe : [SELECT Product2Id, UnitPrice FROM PriceBookEntry
+        WHERE Product2Id IN :topProductIds AND Pricebook2.IsActive = true AND CurrencyIsoCode = :currencyCode]) {
+            productPrices.put(pbe.Product2Id, pbe.UnitPrice);
         }
 
-        return topLaptopUS;
+        List<ProductInfo> productInfos = new List<ProductInfo>();
+        for (Product2 product : products) {
+            Decimal price = productPrices.containsKey(product.Id) ? productPrices.get(product.Id) : 0;
+            productInfos.add(new ProductInfo(product.Id, product.Name, price));
+        }
+
+        return productInfos;
     }
-
     @AuraEnabled(cacheable=true)
-    public static List<Product2> getTopAccessoryKOR() {
-        // Asset에 연결된 Product를 카운트 하여 판매대수 상위 주변기기를 조회합니다.
-        List<AggregateResult> Top5Accessory = [
-                SELECT Product2Id, COUNT(Id) quantity
-                FROM Asset
-                WHERE Refund_availability__c = false AND Product2.Family='accessory' AND Account.Type ='KOR'
-                GROUP BY Product2Id
-                ORDER BY COUNT(Id) DESC
-                LIMIT 5
+    public static String getAccountType(String oppId) {
+        //Opportunity의 Id를 사용하여 연결된 Account의 Type(국가) 필드를 조회
+        Opportunity opp = [
+                SELECT Account.Type
+                FROM Opportunity
+                WHERE Id = :oppId
+                LIMIT 1
         ];
-
-        // Product2Id 리스트를 생성합니다.
-        List<Id> topAccessoryIds = new List<Id>();
-        for (AggregateResult ar : Top5Accessory) {
-            topAccessoryIds.add((Id)ar.get('Product2Id'));
-        }
-
-        // 상위 5개의 Product2Id 순서대로 Product2 레코드를 조회합니다.
-        Map<Id, Product2> productsMap = new Map<Id, Product2>(
-                [SELECT Id, Name, (SELECT Price FROM Assets LIMIT 1) FROM Product2 WHERE Id IN :topAccessoryIds]
-        );
-
-
-        // 정렬된 순서를 유지하기 위해 리스트를 생성합니다.
-        List<Product2> topAccessoryKOR = new List<Product2>();
-        for (Id productId : topAccessoryIds) {
-            Product2 product = productsMap.get(productId);
-            if (product != null) {
-                topAccessoryKOR.add(product);
-            }
-        }
-
-        return topAccessoryKOR;
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static List<Product2> getTopAccessoryUS() {
-        // Asset에 연결된 Product를 카운트 하여 판매대수 상위 주변기기를 조회합니다.
-        List<AggregateResult> Top5Accessory = [
-                SELECT Product2Id, COUNT(Id) quantity
-                FROM Asset
-                WHERE Refund_availability__c = false AND Product2.Family='accessory' AND Account.Type ='US'
-                GROUP BY Product2Id
-                ORDER BY COUNT(Id) DESC
-                LIMIT 5
-        ];
-
-        // Product2Id 리스트를 생성합니다.
-        List<Id> topAccessoryIds = new List<Id>();
-        for (AggregateResult ar : Top5Accessory) {
-            topAccessoryIds.add((Id)ar.get('Product2Id'));
-        }
-
-        // 상위 5개의 Product2Id 순서대로 Product2 레코드를 조회합니다.
-        Map<Id, Product2> productsMap = new Map<Id, Product2>(
-                [SELECT Id, Name, (SELECT Price FROM Assets LIMIT 1) FROM Product2 WHERE Id IN :topAccessoryIds]
-        );
-
-
-        // 정렬된 순서를 유지하기 위해 리스트를 생성합니다.
-        List<Product2> topAccessoryUS = new List<Product2>();
-        for (Id productId : topAccessoryIds) {
-            Product2 product = productsMap.get(productId);
-            if (product != null) {
-                topAccessoryUS.add(product);
-            }
-        }
-
-        return topAccessoryUS;
+        return opp.Account != null ? opp.Account.Type : null;
     }
 }

@@ -1,43 +1,56 @@
+<!--*******************************************************************************
+  * File Name   : oppBaseLwc.html
+  * Description : 
+  * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+  * Author      : Sejong An
+  * Modification Log
+  * ===============================================================
+  * Ver  Date        Author            Modification
+  * ===============================================================
+  * 1.0  2024.04.26  Sejong An         Create
+********************************************************************************-->
 <template>
     <template if:true={displayComponent}>
     <!-- <lightning-card title="Opportunity Creator"> -->
-        <div class="slds-grid slds-wrap slds-grid_vertical slds-m-horizontal_large">
-            <div class="slds-col slds-size_1-of-1">
+        <div>
+            <div class="slds-p-around_large">
                 <lightning-input label={label.c_consultaion} value={opportunityName} onchange={handleNameChange} data-field="opportunityName"></lightning-input>
                 <lightning-combobox label={label.c_account} value={accountId} options={accountOptions} onchange={handleAccountChange} data-field="accountId"></lightning-combobox>
                 <lightning-input type="date" label={label.c_closeDate} value={closeDate} onchange={handleDateChange} data-field="closeDate"></lightning-input>
             </div>
-            <div class="slds-col slds-size_1-of-1">
-                <div class="slds-grid slds-gutters slds-align_absolute-center slds-m-top_x-small">
-                    <lightning-button variant="brand" label={label.c_selectCustomer} onclick={toggle2} class="slds-col slds-p-horizontal_none slds-p-bottom_small"></lightning-button>
-                    <lightning-button variant="brand" label={label.c_newCustomer} onclick={toggle1} class="slds-col slds-p-horizontal_none slds-m-horizontal_none slds-p-bottom_small"></lightning-button>      
-                </div>
+            <div>
+                <lightning-layout class="slds-p-horizontal_large" horizontal-align="spread">
+                    <lightning-layout-item flexibility="auto">
+                        <lightning-button variant="brand" label={label.c_selectCustomer} onclick={toggle2}></lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto">
+                        <lightning-button variant="brand" label={label.c_newCustomer} onclick={toggle1}></lightning-button>
+                    </lightning-layout-item>  
+                </lightning-layout>
                 <template if:true={isCustomerInfoVisible}>
-                        <lightning-combobox label={label.c_contact} placeholder={label.c_below} value={contactId} options={contactOptions} onchange={handleContactChange} onfocus={handleFocus} data-field="contactId" class="slds-m-top_x-small"></lightning-combobox>
+                        <lightning-combobox label={label.c_contact} placeholder={label.c_below} value={contactId} options={contactOptions} onchange={handleContactChange} onfocus={handleFocus} data-field="contactId" class="slds-p-horizontal_large"></lightning-combobox>
                     <div>
                         <div>
-                            <div class="slds-grid slds-gutters slds-align_absolute-center">
-                                <lightning-input type="tel" placeholder={label.c_Enter_phone_number} value={phoneNum} pattern="[0-9\-\+\(\)]{1,12}" onchange={doHold} onkeypress={doEnterkey} variant="label-hidden" class="slds-col slds-size_3-of-4 slds-p-left_none slds-p-right_x-small" ></lightning-input>
-                                <lightning-button variant="brand" label={label.c_Search} onclick={doSearch} class="slds-col slds-size_1-of-4 slds-p-horizontal_none slds-m-vertical_x-small"></lightning-button>
-                            </div>
+                            <lightning-layout class="slds-p-horizontal_large" horizontal-align="spread">
+                                <lightning-layout-item >
+                                    <lightning-input type="tel" placeholder={label.c_Enter_phone_number} value={phoneNum} onkeypress={pressEnter}  pattern="[0-9\-\+\(\)]{1,12}" onchange={holdContact} variant="label-hidden"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item>
+                                    <lightning-button variant="brand" label={label.c_Search} onclick={searchContact}></lightning-button>
+                                </lightning-layout-item>
+                            </lightning-layout>
                             <templete if:true={displayConList}>
-                                <div>
+                                <div class="slds-p-horizontal_large">
                                     <template lwc:if={result}>
                                         <template for:each={result} for:item="contact">
-                                            <lightning-card key={contact.Id}>
-                                                <h3 slot="title">
-                                                <lightning-icon icon-name="standard:contact" size="small" ></lightning-icon>
-                                                <a class="slds-p-left_x-small" onclick={doOpen} data-record-id={contact.Id}>
-                                                    {contact.Name}
-                                                </a>
-                                                </h3>
-                                                <p class="slds-p-horizontal_small"><b>{label.c_typeInCard}</b> {contact.Type__c}</p>
-                                                <p class="slds-p-horizontal_small"><b>{label.c_phone}</b> {contact.Phone}</p>
+                                            <lightning-card variant="Narrow" title={contact.Name} icon-name="standard:contact" key={contact.Id} onclick={openContact} data-record-id={contact.Id}>
+                                                <p class="slds-p-horizontal_small" data-record-id={contact.Id}><b>{label.c_typeInCard}</b> {contact.Type__c}</p>
+                                                <p class="slds-p-horizontal_small" data-record-id={contact.Id}><b>{label.c_phone}</b> {contact.Phone}</p>
                                             </lightning-card>
                                         </template>
                                     </template>
                                     <template lwc:if={error}>
-                                        <p class="slds-text-align_center">{label.c_ErrorSearchMessage}</p>
+                                        <p>{label.c_ErrorSearchMessage}</p>
                                     </template>
                                 </div>
                             </templete>
@@ -53,12 +66,14 @@
                 </template>
             </div>
         </div>
-        <div class="slds-align_absolute-center">
-            <lightning-button variant="brand" label={label.c_create} title="Create" onclick={createOpportunity} class="slds-m-top_medium"></lightning-button>
-        </div>
+        <lightning-layout horizontal-align="center">
+            <lightning-layout-item padding="around-small">
+                <lightning-button variant="brand" label={label.c_create} title="Create" onclick={createOpportunity}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
     <!-- </lightning-card> -->
     </template>
     <template if:false={displayComponent}>
-        <p class="slds-text-align_center">{label.c_NoPermission}</p>
+        <p>{label.c_NoPermission}</p>
     </template>
 </template>

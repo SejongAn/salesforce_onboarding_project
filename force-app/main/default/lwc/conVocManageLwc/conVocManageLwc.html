@@ -1,0 +1,47 @@
+<template>
+    <lightning-card>
+        <div class="slds-p-horizontal_small">
+            <lightning-layout class="slds-m-bottom_x-small">
+                <lightning-icon icon-name="standard:case"
+                                size="small"></lightning-icon>
+                <p class="slds-card__header-title slds-m-left_x-small">
+                    VoC
+                </p>
+            </lightning-layout>
+            <template lwc:if={caseAssetId}>
+                <div class="slds-has-dividers_bottom-space">
+                    <p class="slds-item"><b>{label.Asset}</b> {asset.Name}</p>
+                    <p class="slds-p-top_x-small slds-p-left_x-small"><b>{label.Warranty_Period}</b> {asset.PurchaseDate} ~ {asset.Warranty_End_Date__c}</p>
+                    <p class="slds-item"> *{label.Warranty_Information}</p>
+                    <p class="slds-item"><b>{label.Replaceable_Date}</b> {asset.Replaceable_Date__c}</p>
+                    <p class="slds-item"><b>{label.Warranty_Status}</b> {asset.Warranty_status__c}</p>
+                </div>
+                <div class="slds-p-top_x-small">
+                    <template lwc:if={cases}>
+                        <lightning-datatable key-field="Id" data={cases} columns={columns}
+                                             hide-checkbox-column onrowaction={openRecord} column-widths-mode="auto"></lightning-datatable>
+                    </template>
+                    <div class="slds-m-top_small">
+                        <lightning-layout horizontal-align="spread">
+                            <lightning-layout-item size="3">
+                                <lightning-combobox  name="Type" label={label.caseType} value={typeValue} options={typeOptions} onchange={handleTypeChange} required></lightning-combobox>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="9">
+                                <lightning-combobox class="slds-m-left_xx-small" name="Reason" label={label.caseReason} value={reasonValue} options={reasonOptions} onchange={handleReasonChange} required></lightning-combobox>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-input label={label.caseSubject} type="text" value={Subject} onchange={handleSubjectChange} required></lightning-input>
+                        <lightning-input label={label.caseDescription} type="text" value={Description} onchange={handleDescriptionChange}  required></lightning-input>
+                        <div  class="slds-text-align_center slds-m-top_small">
+                            <lightning-button label={label.Create_VOC} variant="brand" onclick={doCreation}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template lwc:else>
+                <p class="slds-text-align_center">{label.VOC_Information}
+                </p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

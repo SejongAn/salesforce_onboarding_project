@@ -1,3 +1,16 @@
+/*
+*******************************************************************************
+  * File Name   : OrderTriggerHandler.cls
+  * Description : OrderTriggerHandler in cls 
+  * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+  * Author      : i2max
+  * Modification Log
+  * ===============================================================
+  * Ver  Date        Author            Modification
+  * ===============================================================
+  * 1.0  2024.04.26  JaeHwan Lee        Create
+********************************************************************************
+*/
 public without sharing class OrderTriggerHandler {
     // afterInsert: 고객 유형,  상담 단계,  주문제품 생성,  자산 생
     public void afterInsert(List<Order> newOrders) {

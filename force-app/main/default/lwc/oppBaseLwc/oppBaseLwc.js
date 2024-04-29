@@ -1,3 +1,14 @@
+// <!--*******************************************************************************
+//   * File Name   : oppBaseLwc.js
+//   * Description : 
+//   * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+//   * Author      : Sejong An
+//   * Modification Log
+//   * ===============================================================
+//   * Ver  Date        Author            Modification
+//   * ===============================================================
+//   * 1.0  2024.04.26  Sejong An         Create
+// ********************************************************************************-->
 import { LightningElement, track, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -17,15 +28,12 @@ import c_consultaion from '@salesforce/label/c.Consultation_Name';
 import c_contact from '@salesforce/label/c.Contact';
 import c_create from '@salesforce/label/c.Create';
 import c_email from '@salesforce/label/c.Email';
-
 import c_firstName from '@salesforce/label/c.First_Name';
 import c_LastName from '@salesforce/label/c.Last_Name';
 import c_newCustomer from '@salesforce/label/c.new_customer_info';
 import c_phone from '@salesforce/label/c.Phone';
-
 import c_selectCustomer from '@salesforce/label/c.Select_Exisitng_Customer';
 import c_below from '@salesforce/label/c.Serch_contact_below';
-
 import c_Enter_phone_number from '@salesforce/label/c.Enter_phone_number';
 import c_typeInCard from '@salesforce/label/c.typeInCard';
 import c_Search from '@salesforce/label/c.Search';
@@ -34,6 +42,7 @@ import c_NoPermission from '@salesforce/label/c.No_Permission';
 import requError from '@salesforce/label/c.Required_fields_not_filled_in';
 import bothError from '@salesforce/label/c.Both_returning_and_first_time_visit_information_has_been_entered';
 import allError from '@salesforce/label/c.Please_enter_all_of_your_customer_information';
+import SYSTEM_ADMIN from '@salesforce/label/c.SYSTEM_ADMIN';
 
 export default class OpportunityForm extends LightningElement {
     //import한 Custom Label값 변수에 할당
@@ -86,7 +95,7 @@ export default class OpportunityForm extends LightningElement {
         if (data) {
             const profileName = getFieldValue(data, PROFILE_NAME_FIELD);
             // 특정 프로필 이름을 기준으로 컴포넌트 표시 결정
-            if(profileName === 'System Administrator' || profileName === '시스템 관리자'|| profileName === 'Sales Team'){
+            if(profileName === SYSTEM_ADMIN || profileName === 'Sales Team'){
                 this.displayComponent = true;
             }
         } else if (error) {
@@ -105,7 +114,7 @@ export default class OpportunityForm extends LightningElement {
                 this.accountId = data[0].Id;
             }
         } else if (error) {
-            this.showToast('Error fetching owned accounts', error.body.message, 'error');
+            console.error('Error fetching owned accounts: '+error.body.message, error);
         }
     }
 
@@ -194,7 +203,7 @@ export default class OpportunityForm extends LightningElement {
                     this.navigateToRecordPage();
                 })
                 .catch(error => {
-                    this.showToast('Error', error.body.message, 'error');
+                    console.error('Error: '+error.body.message, error);
                 });
             }
             else if(!this.firstName && this.contactId){ //재방문 상담
@@ -204,7 +213,7 @@ export default class OpportunityForm extends LightningElement {
                     this.navigateToRecordPage();
                 })
                 .catch(error => {
-                    this.showToast('Error', error.body.message, 'error');
+                    console.error('Error: '+error.body.message, error);
                 });
             }
             else{
@@ -214,7 +223,7 @@ export default class OpportunityForm extends LightningElement {
                     this.navigateToRecordPage();
                 })
                 .catch(error => {
-                    this.showToast('Error', error.body.message, 'error');
+                    console.error('Error: '+error.body.message, error);
                 });
             }
         }
@@ -230,12 +239,18 @@ export default class OpportunityForm extends LightningElement {
         window.location.href = url;
     }
 
-    doHold(event){
+    holdContact(event){
         this.phoneNum = event.target.value;
     }
 
+    pressEnter(event) {
+        if (event.keyCode === 13) {
+            this.searchContact();
+        }
+    }
+
     //사용자가 입력한 번호가 존재하는지 검색
-    doSearch(){
+    searchContact(){
         this.displayConList=true;
         if(this.phoneNum != ''){
             let searchNum = this.phoneNum.replace(/[^0-9]/g,'');
@@ -265,7 +280,7 @@ export default class OpportunityForm extends LightningElement {
     }
 
     //해당 contact 레코드로 이동
-    doOpen(event){
+    openContact(event){
         this.contactId = event.target.dataset.recordId;
         this.displayConList=false;
     }

@@ -11,7 +11,7 @@
   * 1.0  2024.04.26  JaeHwan Lee        Create
 ********************************************************************************
 */
-global class OrderQueryBatchScheduler implements Schedulable {
+global class OrderQueryBatchScheduler_sc implements Schedulable {
     global void execute(SchedulableContext SC) {
         OrderQueryBatch batchJob = new OrderQueryBatch();
         Database.executeBatch(batchJob, 200);

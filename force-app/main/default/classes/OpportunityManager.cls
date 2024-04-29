@@ -1,3 +1,14 @@
+// <!--*******************************************************************************
+//   * File Name   : OpportunityManager.cls
+//   * Description : Classes for SOQL usage of oppBaseLwc.
+//   * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+//   * Author      : SejongAn
+//   * Modification Log
+//   * ===============================================================
+//   * Ver  Date        Author            Modification
+//   * ===============================================================
+//   * 1.0  2024.04.24  Sejong An        Create
+// ********************************************************************************-->
 public with sharing class OpportunityManager {
     @AuraEnabled(cacheable=true)
     public static List<Account> getAccounts(String userId) {
