@@ -38,7 +38,7 @@ export default class ConBaseLwc extends NavigationMixin(LightningElement) {
                 if (result.length == 0) {
                     console.log('search fail');
                 } else {
-                    const contacts = result.map(contact => {
+                    const contacts = result.map(contact => {           
                         return {
                             Id: contact.Id,
                             Name: contact.Name,

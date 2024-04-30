@@ -2,7 +2,7 @@
   * File Name   : oppBaseLwc.html
   * Description : 
   * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
-  * Author      : Sejong An
+  * Author      : i2max
   * Modification Log
   * ===============================================================
   * Ver  Date        Author            Modification
@@ -32,23 +32,43 @@
                     <div>
                         <div>
                             <lightning-layout class="slds-p-horizontal_large" horizontal-align="spread">
-                                <lightning-layout-item >
+                                <lightning-layout-item size="9">
                                     <lightning-input type="tel" placeholder={label.c_Enter_phone_number} value={phoneNum} onkeypress={pressEnter}  pattern="[0-9\-\+\(\)]{1,12}" onchange={holdContact} variant="label-hidden"></lightning-input>
                                 </lightning-layout-item>
-                                <lightning-layout-item>
-                                    <lightning-button variant="brand" label={label.c_Search} onclick={searchContact}></lightning-button>
+                                <lightning-layout-item size="3">
+                                    <lightning-button variant="brand" label={label.c_Search} onclick={firstSearch}></lightning-button>
                                 </lightning-layout-item>
                             </lightning-layout>
+
                             <templete if:true={displayConList}>
                                 <div class="slds-p-horizontal_large">
-                                    <template lwc:if={result}>
+                                    <!-- <template lwc:if={result}>
                                         <template for:each={result} for:item="contact">
                                             <lightning-card variant="Narrow" title={contact.Name} icon-name="standard:contact" key={contact.Id} onclick={openContact} data-record-id={contact.Id}>
                                                 <p class="slds-p-horizontal_small" data-record-id={contact.Id}><b>{label.c_typeInCard}</b> {contact.Type__c}</p>
                                                 <p class="slds-p-horizontal_small" data-record-id={contact.Id}><b>{label.c_phone}</b> {contact.Phone}</p>
                                             </lightning-card>
                                         </template>
+                                    </template> -->
+
+                                    <template lwc:if={result}>
+                                        <div>
+                                            <lightning-datatable
+                                                    key-field="Name"
+                                                    data={result}
+                                                    columns={columns}
+                                                    hide-checkbox-column
+                                                    onrowaction={openContact}>
+                                            </lightning-datatable>
+                                            <lightning-layout horizontal-align="center">
+                                                <lightning-button-group>
+                                                    <lightning-button label="<" onclick={leftPage}></lightning-button>
+                                                    <lightning-button label=">" onclick={rightPage}></lightning-button>
+                                                </lightning-button-group>
+                                            </lightning-layout>
+                                        </div>
                                     </template>
+
                                     <template lwc:if={error}>
                                         <p>{label.c_ErrorSearchMessage}</p>
                                     </template>
@@ -59,10 +79,12 @@
                 </template>
                 
                 <template if:false={isCustomerInfoVisible}>
-                    <lightning-input label={label.c_firstName} value={firstName} onchange={handleFirstNameChange} data-field="firstName"></lightning-input>
-                    <lightning-input label={label.c_LastName} value={lastName} onchange={handleLastNameChange} data-field="lastName"></lightning-input>
-                    <lightning-input type="tel" label={label.c_phone} value={phone} onchange={handleTelChange} data-field="phone"></lightning-input>
-                    <lightning-input type="email" label={label.c_email} value={email} onchange={handleEmailChange} data-field="email"></lightning-input>
+                    <div class="slds-p-horizontal_large">
+                        <lightning-input label={label.c_firstName} value={firstName} onchange={handleFirstNameChange} data-field="firstName"></lightning-input>
+                        <lightning-input label={label.c_LastName} value={lastName} onchange={handleLastNameChange} data-field="lastName"></lightning-input>
+                        <lightning-input type="tel" label={label.c_phone} value={phone} onchange={handleTelChange} data-field="phone"></lightning-input>
+                        <lightning-input type="email" label={label.c_email} value={email} onchange={handleEmailChange} data-field="email"></lightning-input>
+                    </div>
                 </template>
             </div>
         </div>

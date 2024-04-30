@@ -2,7 +2,7 @@
 //   * File Name   : oppBaseLwc.js
 //   * Description : 
 //   * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
-//   * Author      : Sejong An
+//   * Author      : i2max
 //   * Modification Log
 //   * ===============================================================
 //   * Ver  Date        Author            Modification
@@ -17,10 +17,10 @@ import getContacts from '@salesforce/apex/OpportunityManager.getContacts';
 import createSimpleConsult from '@salesforce/apex/OpportunityManager.createSimpleConsult';
 import createFirstConsult from '@salesforce/apex/OpportunityManager.createFirstConsult';
 import createRevisitConsult from '@salesforce/apex/OpportunityManager.createRevisitConsult';
-import searchPhone from '@salesforce/apex/ContactSearch.searchPhone';
+import searchPhoneWithOffset from '@salesforce/apex/ContactSearch.searchPhoneWithOffset';
+
 import USER_ID from '@salesforce/user/Id'
 import PROFILE_NAME_FIELD from '@salesforce/schema/User.Profile.Name';
-import lang from '@salesforce/i18n/lang';
 //Custom Label import
 import c_account from '@salesforce/label/c.Account_Name';
 import c_closeDate from '@salesforce/label/c.Close_Date';
@@ -43,6 +43,9 @@ import requError from '@salesforce/label/c.Required_fields_not_filled_in';
 import bothError from '@salesforce/label/c.Both_returning_and_first_time_visit_information_has_been_entered';
 import allError from '@salesforce/label/c.Please_enter_all_of_your_customer_information';
 import SYSTEM_ADMIN from '@salesforce/label/c.SYSTEM_ADMIN';
+import not_purchased from '@salesforce/label/c.not_purchased';
+import purchased from '@salesforce/label/c.purchased';
+import PoNumber from '@salesforce/schema/Order.PoNumber';
 
 export default class OpportunityForm extends LightningElement {
     //import한 Custom Label값 변수에 할당
@@ -66,6 +69,12 @@ export default class OpportunityForm extends LightningElement {
     c_NoPermission
     };
 
+    columns = [
+        { label: 'RowNum', fieldName: 'RowNum' },
+        { label: 'Label', fieldName: 'Name' , type: 'button' ,typeAttributes: { label: { fieldName: 'Name' }, variant: 'base' }},
+        { label: 'Phone', fieldName: 'Phone' },
+    ];
+
     recordId;
     checkPoint;
     @track opportunityName;
@@ -86,6 +95,9 @@ export default class OpportunityForm extends LightningElement {
     @track phoneNum;
     result;
     error;
+
+    recordPerPage=5;
+    pageNum=1;
     
     
 
@@ -252,20 +264,29 @@ export default class OpportunityForm extends LightningElement {
     //사용자가 입력한 번호가 존재하는지 검색
     searchContact(){
         this.displayConList=true;
-        if(this.phoneNum != ''){
-            let searchNum = this.phoneNum.replace(/[^0-9]/g,'');
-            searchPhone({searchNum:searchNum}).then(result => {
+        if(!this.pageNum){
+            this.pageNum+=1;
+        }
+        
+        if(this.phoneNum){
+            let searchNum = this.phoneNum.replace(/[^0-9]/g, '');
+            searchPhoneWithOffset({searchNum:searchNum, pageNum:this.pageNum, recordPerPage:this.recordPerPage}).then(result => {
                 if(result.length == 0){
                     console.log('search fail');
-                } else {
+                    this.pageNum-=1;
+                } 
+                if(result) {
+                    console.log(result);
+                    console.log('1');
                     const contacts = result.map(contact => {
                         return {
+                            RowNum : contact.RowNum,
                             Id: contact.Id,
                             Name: contact.Name,
                             Phone: contact.Phone,
-                            Type__c: (lang == 'ko') ? (contact.Type__c == "purchased" ? "구매고객" : "상담고객") : contact.Type__c
-                        };
-                    });
+                            Type__c: (contact.Type === 'purchased') ? purchased : not_purchased   
+                        };   
+                    });                    
                     this.result = contacts;
                     this.error = undefined;
                 }
@@ -279,9 +300,24 @@ export default class OpportunityForm extends LightningElement {
         }
     }
 
+    firstSearch(){
+        this.pageNum=1;
+        this.searchContact();
+    }
+
+    leftPage(){
+        this.pageNum-=1;
+        this.searchContact();
+    }
+
+    rightPage(){
+        this.pageNum+=1;
+        this.searchContact();
+    }
+
     //해당 contact 레코드로 이동
     openContact(event){
-        this.contactId = event.target.dataset.recordId;
+        this.contactId = event.detail.row.Id;
         this.displayConList=false;
     }
 
