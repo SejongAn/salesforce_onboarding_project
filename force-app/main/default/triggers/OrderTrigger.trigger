@@ -1,6 +1,19 @@
+/*
+*******************************************************************************
+  * File Name   : ordercreate.trigger
+  * Description : ordercreate in trigger 
+  * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+  * Author      : i2max
+  * Modification Log
+  * ===============================================================
+  * Ver  Date        Author            Modification
+  * ===============================================================
+  * 1.0  2024.04.26  JaeHwan Lee        Create
+********************************************************************************
+*/
 trigger OrderTrigger on Order (after insert, after update) {
     OrderTriggerHandler handler = new OrderTriggerHandler();
-   
+
     List<Id> contactIds = new List<Id>();
     List<Order> updatedOrders = new List<Order>();
     List<Order> ordersWithDiscountRateChanged = new List<Order>();
@@ -27,7 +40,7 @@ trigger OrderTrigger on Order (after insert, after update) {
             }
         }
     }
-   
+
     if (Trigger.isInsert) {
         handler.afterInsert(Trigger.new);
         if (!contactIds.isEmpty()) {

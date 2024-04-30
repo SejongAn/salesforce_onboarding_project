@@ -29,7 +29,7 @@ public without sharing class OrderTriggerHandler {
             }
 
             // Order와 연결된 Contact의 Purchasing_Account__c 저장을 위한 Map 생성
-            Map<Id, Contact> contactMap = new Map<Id, Contact>([SELECT Id, AccountId,Purchasing_Account__c FROM Contact WHERE Id IN :contactIds]);
+            Map<Id, Contact> contactMap = new Map<Id, Contact>([SELECT Id, AccountId, Purchasing_Account__c FROM Contact WHERE Id IN :contactIds]);
 
             // Contact들과 관련된 Asset을 조회하기 위한 Map을 생성합니다.
             Map<Id, List<Asset>> contactToAssetsMap = new Map<Id, List<Asset>>();
@@ -109,7 +109,7 @@ public without sharing class OrderTriggerHandler {
 
             // Order 객체들을 다시 조회하여, 각각의 OpportunityId를 키로 가지는 Map에 저장합니다.
             Map<Id, Order> orderMap = new Map<Id, Order>();
-            for (Order order : [SELECT Id, AccountId,OpportunityId, Contact__c, Pricebook2Id,EffectiveDate FROM Order WHERE Id IN :orderIds]) {
+            for (Order order : [SELECT Id, AccountId, OpportunityId, Contact__c, Pricebook2Id,EffectiveDate FROM Order WHERE Id IN :orderIds]) {
                 orderMap.put(order.OpportunityId, order);
             }
 

@@ -8,7 +8,7 @@
   * ===============================================================
   * Ver  Date        Author            Modification
   * ===============================================================
-  * 1.0  2024.04.26  JaeHwan Lee        Create
+  * 1.0  2024.04.27  JaeHwan Lee        Create
 ********************************************************************************
 */
 import { api, LightningElement, track, wire } from "lwc";
@@ -411,11 +411,11 @@ export default class OrderCreate extends NavigationMixin(LightningElement) {
         else {
             this.discountRate=Math.floor(Number(this.discountRate)); //소수점 제거
         }
-        if(this.orderDate == null || this.orderDate.trim() === ''){
+        if(!this.orderDate.reportValidity()){
             this.showToast('Error', '주문 날짜를 입력해주세요.', 'error');
             return; 
         }
-        /*if(this.paymentOptions==null || this.paymentOptions.trim() === ''){
+        /*if(!this.paymentOptions.reportValidity()){
             this.showToast('Error', '결제 방식을 선택해주세요.', 'error');
             return;
         }*/

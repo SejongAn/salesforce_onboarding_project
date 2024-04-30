@@ -1,11 +1,30 @@
+<!--*******************************************************************************
+//   * File Name   : oppProductrankingLwc.html
+//   * Description : oppty 레코드 페이지에서 제품군별 상위 제품을 국가에 맞춰 가격과 함께 보여줌
+//                        좌측은 노트북 상위제품  // 우측은 주변기기 상위제품
+//   * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+//   * Author      : i2max
+//   * Modification Log
+//   * ===============================================================
+//   * Ver  Date        Author            Modification
+//   * ===============================================================
+//   * 1.0  2024.04.29  Byeonghak Lim        Create
+// ********************************************************************************-->
 <template>
-    <lightning-card title="Top5 Product" icon-name="standard:product_request">
+    <lightning-card>
+        <lightning-layout class="slds-m-bottom_x-small">
+            <lightning-icon class="slds-m-left_small" icon-name="standard:product_request"
+                            size="small"></lightning-icon>
+            <p class="slds-card__header-title slds-m-left_x-small">
+                TOP5 {label.Product}
+            </p>
+        </lightning-layout>
         <div class="slds-grid slds-wrap">
             <!-- 좌측 lightning-datatable -->
             <div class="slds-col slds-size_1-of-2">
                 <!-- 좌측 테이블 제목 -->
                 <div class="slds-m-bottom_small slds-border_right" style="padding:0.5rem;background:#9798a3">
-                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 Laptop</h3>
+                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 {label.Laptop}</h3>
                 </div>
                 <lightning-datatable
                         key-field="Id"
@@ -21,7 +40,7 @@
             <div class="slds-col slds-size_1-of-2">
                 <!-- 우측 테이블 제목 -->
                 <div class="slds-m-bottom_small" style="padding:0.5rem;background:#9798a3">
-                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 Accessories</h3>
+                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 {label.Accessories}</h3>
                 </div>
                 <lightning-datatable
                         key-field="Id"

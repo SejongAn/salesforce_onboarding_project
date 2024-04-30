@@ -1,8 +1,19 @@
+<!--*******************************************************************************
+  * File Name   : oppOrderLwc.html
+  * Description : oppty 레코드 페이지에서 연결된 고객의 주문 내역을 보여줌
+  * Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+  * Author      : i2max
+  * Modification Log
+  * ===============================================================
+  * Ver  Date        Author            Modification
+  * ===============================================================
+  * 1.0  2024.04.29  Byeonghak Lim        Create
+********************************************************************************-->
 <template>
     <lightning-card>
         <div class="slds-m-around_medium">
             <lightning-layout>
-                    <p style="font-size:14px; margin-left: 5px;">
+                    <p style="font-size:15px">
                         <lightning-icon icon-name="standard:orders"
                                         size="small"></lightning-icon>
                         <strong> Orders ({orderCount})</strong></p>
@@ -11,8 +22,16 @@
         <lightning-datatable
                 key-field="id"
                 data={orders}
+                onrowaction={OrderNumORAsset}
                 columns={columns}
-                onrowaction={handleRowAction}>
+                show-row-number-column
+                row-number-offset="0"
+                hide-checkbox-column>
         </lightning-datatable>
+        <template if:true={showNoOrdersMessage}>
+            <div class="slds-m-around_medium slds-text-align_center">
+                <p>There is no Order related to this Contact.</p>
+            </div>
+        </template>
     </lightning-card>
 </template>
