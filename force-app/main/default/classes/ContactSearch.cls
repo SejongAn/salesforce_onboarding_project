@@ -7,8 +7,8 @@
 * ===============================================================
 * Ver  Date        Author            Modification
 * ===============================================================
-* 1.0  2024.04.20  Yeongeun Kim     create
-* 2.0  2024.04.30  Sejong An        Add searchPhoneWithOffset Method
+* 1.0  2024.04.20  Yeongeun Kim      Create
+* 2.0  2024.04.30  Sejong An         Add searchPhoneWithOffset Method
 ********************************************************************************/
 public with sharing class ContactSearch {
 
@@ -45,7 +45,7 @@ public with sharing class ContactSearch {
 
         List<AggregateResult> results = [SELECT COUNT(Id) numContacts FROM Contact];
         Integer contactCount = (Integer)results[0].get('numContacts');
-
+ 
         if(contactCount < firstPageNum + recordPerPage-1){
             recordPerPage = contactCount - firstPageNum;
         }
@@ -63,7 +63,6 @@ public with sharing class ContactSearch {
             conwrap.RowNum = firstPageNum;
             contacts.add(conwrap);
         }
-        System.debug(contacts);
         return contacts;
     }
 

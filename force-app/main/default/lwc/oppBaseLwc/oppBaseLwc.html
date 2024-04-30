@@ -7,7 +7,8 @@
   * ===============================================================
   * Ver  Date        Author            Modification
   * ===============================================================
-  * 1.0  2024.04.26  Sejong An         Create
+  * 1.0  2024.04.26  Sejong An         Create 
+  * 1.1  2024.04.30  Sejong An         Change to Contact Table and Pagenation
 ********************************************************************************-->
 <template>
     <template if:true={displayComponent}>
@@ -58,6 +59,8 @@
                                                     data={result}
                                                     columns={columns}
                                                     hide-checkbox-column
+                                                    column-widths-mode="auto"
+                                                    resize-column-disabled
                                                     onrowaction={openContact}>
                                             </lightning-datatable>
                                             <lightning-layout horizontal-align="center">

@@ -1,3 +1,14 @@
+/*******************************************************************************
+* File Name   : ContactSearch
+        * Description : ContactSearch
+* Copyright   : Copyright © 1995-2024 i2max All Rights Reserved
+* Author      : i2max
+* Modification Log
+* ===============================================================
+* Ver  Date        Author            Modification
+* ===============================================================
+* 1.0  2024.04.20  Sejong An         Create
+********************************************************************************/
 public class CheckAssetsForContact {
     
     public class Request {

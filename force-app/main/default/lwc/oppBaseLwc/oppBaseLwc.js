@@ -8,6 +8,8 @@
 //   * Ver  Date        Author            Modification
 //   * ===============================================================
 //   * 1.0  2024.04.26  Sejong An         Create
+//   * 1.1  2024.04.26  Sejong An         Change to Contact Table from Contact Card
+//   * 1.2  2024.04.30  Sejong An         Add Pagenation
 // ********************************************************************************-->
 import { LightningElement, track, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
@@ -18,7 +20,6 @@ import createSimpleConsult from '@salesforce/apex/OpportunityManager.createSimpl
 import createFirstConsult from '@salesforce/apex/OpportunityManager.createFirstConsult';
 import createRevisitConsult from '@salesforce/apex/OpportunityManager.createRevisitConsult';
 import searchPhoneWithOffset from '@salesforce/apex/ContactSearch.searchPhoneWithOffset';
-
 import USER_ID from '@salesforce/user/Id'
 import PROFILE_NAME_FIELD from '@salesforce/schema/User.Profile.Name';
 //Custom Label import
@@ -45,7 +46,8 @@ import allError from '@salesforce/label/c.Please_enter_all_of_your_customer_info
 import SYSTEM_ADMIN from '@salesforce/label/c.SYSTEM_ADMIN';
 import not_purchased from '@salesforce/label/c.not_purchased';
 import purchased from '@salesforce/label/c.purchased';
-import PoNumber from '@salesforce/schema/Order.PoNumber';
+import COM_LAB_NAME from '@salesforce/label/c.COM_LAB_NAME';
+import COM_LAB_PHONE from '@salesforce/label/c.COM_LAB_PHONE';
 
 export default class OpportunityForm extends LightningElement {
     //import한 Custom Label값 변수에 할당
@@ -70,9 +72,9 @@ export default class OpportunityForm extends LightningElement {
     };
 
     columns = [
-        { label: 'RowNum', fieldName: 'RowNum' },
-        { label: 'Label', fieldName: 'Name' , type: 'button' ,typeAttributes: { label: { fieldName: 'Name' }, variant: 'base' }},
-        { label: 'Phone', fieldName: 'Phone' },
+        { label: '', fieldName: 'RowNum',hideDefaultActions: true},
+        { label: COM_LAB_NAME, fieldName: 'Name' , type: 'button' ,typeAttributes: { label: { fieldName: 'Name' }, variant: 'base' }},
+        { label: COM_LAB_PHONE, fieldName: 'Phone', hideDefaultActions: true}
     ];
 
     recordId;
@@ -255,6 +257,7 @@ export default class OpportunityForm extends LightningElement {
         this.phoneNum = event.target.value;
     }
 
+    //Enter키 동작
     pressEnter(event) {
         if (event.keyCode === 13) {
             this.searchContact();
