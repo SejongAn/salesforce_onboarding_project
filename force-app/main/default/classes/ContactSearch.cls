@@ -8,7 +8,7 @@
 * Ver  Date        Author            Modification
 * ===============================================================
 * 1.0  2024.04.20  Yeongeun Kim      Create
-* 2.0  2024.04.30  Sejong An         Add searchPhoneWithOffset Method
+* 2.0  2024.04.30  Sejong An         Add searchPhoneWithOffset method
 ********************************************************************************/
 public with sharing class ContactSearch {
 
@@ -16,12 +16,8 @@ public with sharing class ContactSearch {
     @AuraEnabled(Cacheable=true)
     public static List<Contact> searchPhone(String searchNum) {
         String searchPattern = '%' + searchNum + '%';
-        List<Contact> contact = [SELECT Id,Name,Type__c,Phone FROM Contact WHERE PHONE LIKE :searchPattern ORDER BY Name];
-        if(contact.size() > 0){
-            return contact;
-        } else {
-            return null;
-        }
+        List<Contact> contact = [SELECT Id,Name,Type__c,Phone FROM Contact WHERE PHONE LIKE :searchPattern ORDER BY Name]?? null;
+        return contact;
     }
 
     public class ContactWrapper {

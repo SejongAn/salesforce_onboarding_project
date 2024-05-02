@@ -13,7 +13,7 @@ public with sharing class CaseController {
     //해당 asset에 related 된 case가 있는지 확인
     @AuraEnabled(Cacheable=true)
     public static List<Case> searchCase(String assetId) {
-        List<Case> cases = [SELECT ID,CaseNumber,Subject,Type,Reason,Status,CreatedDate FROM CASE WHERE Asset__c = :assetId];
+        List<Case> cases = [SELECT ID,CaseNumber,Subject,Type,Reason,Status,CreatedDate FROM CASE WHERE Asset__c = :assetId]?? null;
         return cases;
 
     }

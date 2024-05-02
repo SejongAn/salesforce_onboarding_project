@@ -19,13 +19,21 @@ public without sharing class OppGetOrderAsset {
         Opportunity opp = [SELECT Contact__c FROM Opportunity WHERE Id = :oppId LIMIT 1];
 
         // 찾은 Contact ID를 사용하여 연결 Contact와 연관된 Order 객체 찾기
-        if (opp.Contact__c != null) {
-            return [SELECT Id, OrderNumber, Discount_Order_Amount__c, EffectiveDate, Payment__c
-            FROM Order
-            WHERE Contact__c = :opp.Contact__c
-            ORDER BY EffectiveDate DESC];
-        }
-        return new List<Order>();
+//        if (opp.Contact__c != null) {
+//            return [SELECT Id, OrderNumber, Discount_Order_Amount__c, EffectiveDate, Payment__c
+//            FROM Order
+//            WHERE Contact__c = :opp.Contact__c
+//            ORDER BY EffectiveDate DESC];
+//        }
+//        return new List<Order>();
+
+         List<Order> Orddder = [SELECT Id, OrderNumber, Discount_Order_Amount__c, EffectiveDate, Payment__c
+                                FROM Order
+                                WHERE Contact__c = :opp.Contact__c
+                                ORDER BY EffectiveDate DESC] ?? new List<Order>();
+
+        return Orddder;
+
     }
 
     // Oppty 레코드 페이지에서 1에서 선택한 (2.각각의 주문내역에 대한 자산목록)을 불러오기 위한 메소드
@@ -34,9 +42,9 @@ public without sharing class OppGetOrderAsset {
         List<Asset> assets = [SELECT Id, Name, PurchaseDate, Warranty_status__c, Refund_availability__c
         FROM Asset
         WHERE Order__c = :orderId];
-        if (assets.isEmpty()) {
-            return new List<Asset>(); // 빈 리스트 반환
-        }
+//        if (assets.isEmpty()) {
+//            return new List<Asset>(); // 빈 리스트 반환
+//        }
         return assets;
     }
 

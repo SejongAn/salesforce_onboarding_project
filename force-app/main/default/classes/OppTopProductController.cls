@@ -18,64 +18,92 @@ public without sharing class OppTopProductController {
     public class ProductInfo {
         @AuraEnabled public Id Id { get; set; }
         @AuraEnabled public String Name { get; set; }
+        @AuraEnabled public String Family { get; set; }
+
         @AuraEnabled public Decimal Price { get; set; }
 
-        public ProductInfo(Id id, String name, Decimal price) {
+        public ProductInfo(Id id, String name, Decimal price, String family) {
             this.Id = id;
             this.Name = name;
             this.Price = price;
+            this.Family = family;
         }
     }
 
     // 매개변수로 제품군과 지점 국가를 넣었을 때 각각 나라별 판매대수 상위 제품을 1위부터 순차적으로 나열
-    @AuraEnabled(cacheable=false)
-    public static List<ProductInfo> getTopProducts(String productFamily, String accountType) {
-        List<AggregateResult> topProducts = [
-                SELECT Product2Id, COUNT(Id) quantity
-                FROM Asset
-                WHERE Refund_availability__c = false AND Product2.Family=:productFamily AND Account.Type =:accountType
-                GROUP BY Product2Id
-                ORDER BY COUNT(Id) DESC
-                LIMIT 5
-        ];
+    @AuraEnabled(cacheable=true)
+    public static List<ProductInfo> getTopProducts(String oppId) {
 
-        // 상위 5위 판매제품에 대한 Id값 가져오기
-        List<Id> topProductIds = new List<Id>();
-        for (AggregateResult ar : topProducts) {
-            topProductIds.add((Id)ar.get('Product2Id'));
-        }
+        System.debug('sdfa');
 
-        //상위 5위 판매제품에 대한 Id값 기준으로 Product 형태의 변수에 저장
-        List<Product2> products = [SELECT Id, Name FROM Product2 WHERE Id IN :topProductIds];
+        String accountType = getAccountType(oppId); // 상담지점의 국가 저장
+        List<String> PdtFamily = new List<String>{'laptop', 'accessory'};
+        List<ProductInfo> ProductInfosToJs = new List<ProductInfo>();
 
-        // 사용자의 통화 설정에 따라 알맞는 Price book entry에 접근하여 가격정보를 가져와 Map 형태로 저장
-        Map<Id, Decimal> productPrices = new Map<Id, Decimal>();
-        String currencyCode = UserInfo.getDefaultCurrency();
-        for (PriceBookEntry pbe : [SELECT Product2Id, UnitPrice FROM PriceBookEntry
-        WHERE Product2Id IN :topProductIds AND Pricebook2.IsActive = true AND CurrencyIsoCode = :currencyCode]) {
-            productPrices.put(pbe.Product2Id, pbe.UnitPrice);
-        }
 
-        // 앞서 저장한 Product 와 Price를 초반에 설정한 ProductInfo 형태로 담아 반환
-        List<ProductInfo> productInfos = new List<ProductInfo>();
-        for (Product2 product : products) {
-            Decimal price = productPrices.containsKey(product.Id) ? productPrices.get(product.Id) : 0;
-            productInfos.add(new ProductInfo(product.Id, product.Name, price));
-        }
+        for(String pdtFam : PdtFamily){
+            List<AggregateResult> topProduct = [
+                    SELECT Product2Id, COUNT(Id) quantity
+                    FROM Asset
+                    WHERE Refund_availability__c = false AND Product2.Family =: pdtFam AND Account.Type =: accountType
+                    GROUP BY Product2Id
+                    ORDER BY COUNT(Id) DESC
+                    LIMIT 5
+            ];
 
-        return productInfos;
+            // 상위 5위 판매제품에 대한 Id값 가져오기
+            List<Id> topIds = new List<Id>();
+            for (AggregateResult ar : topProduct) {
+                topIds.add((Id) ar.get('Product2Id'));
+            }
+
+            // topIds 리스트에 저장된 ID에 기반하여 Product2 레코드를 검색합니다.
+            List<Product2> queriedProducts = [SELECT Id, Name, Family FROM Product2 WHERE Id IN :topIds];
+
+            // Products 리스트를 최적화된 순서로 재배열하기 위한 리스트를 준비합니다.
+            List<Product2> products = new List<Product2>();
+
+            // topIds의 순서에 따라 queriedProducts 내의 Product2 객체들을 재정렬합니다.
+            for (Id productId : topIds) {
+                for (Product2 product : queriedProducts) {
+                    if (product.Id == productId) {
+                        products.add(product);
+                        break; // 현재 제품을 찾았으므로 다음 제품 ID로 넘어갑니다.
+                    }
+                }
+            }
+
+
+            // 사용자의 통화 설정에 따라 알맞는 Price book entry에 접근하여 가격정보를 가져와 Map 형태로 저장
+            Map<Id, Decimal> productPrices = new Map<Id, Decimal>();
+            String currencyCode = UserInfo.getDefaultCurrency();
+            for (PriceBookEntry pbe : [
+                    SELECT Product2Id, UnitPrice
+                    FROM PriceBookEntry
+                    WHERE Product2Id IN :topIds AND Pricebook2.IsActive = true AND CurrencyIsoCode = :currencyCode
+            ]) {
+                productPrices.put(pbe.Product2Id, pbe.UnitPrice);
+            }
+
+            // 앞서 저장한 Product 와 Price를 초반에 설정한 ProductInfo 형태로 담아 반환
+            for (Product2 product : products) {
+                Decimal price = productPrices.get(product.Id) ?? 0;
+                ProductInfosToJs.add(new ProductInfo(product.Id, product.Name, price, product.Family));
+            }
+
+        } System.debug('debug' + ProductInfosToJs);
+        return ProductInfosToJs;
+
     }
 
     // 상담의 recordId 값을 넣어 상담이 진행된 지점의 국가 정보를 가져옴. 이후 상위 판매제품 메소드의 매개변수로 활용
     @AuraEnabled(cacheable=true)
     public static String getAccountType(String oppId) {
-        //Opportunity의 Id를 사용하여 연결된 Account의 Type(국가) 필드를 조회
-        Opportunity opp = [
-                SELECT Account.Type
-                FROM Opportunity
-                WHERE Id = :oppId
-                LIMIT 1
-        ];
-        return opp.Account != null ? opp.Account.Type : null;
+        // Opportunity의 Account의 Type을 찾습니다.
+        Opportunity opp = [SELECT Account.Type FROM Opportunity WHERE Id =: oppId LIMIT 1];
+//        String accountType = opp.Account.Type;
+//        return accountType;
+
+        return opp.Account?.Type;
     }
 }

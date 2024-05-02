@@ -73,25 +73,22 @@ private class OrderTriggerHandler_ts {
     }
 
     @IsTest
-    static void testOrderInsertion() {
+    static void testOrderInsertion1() { //order insert 설정
         Test.startTest();
         // Query the test data created by @TestSetup
         Account testAccount = [SELECT Id FROM Account WHERE Name = 'Test Account' LIMIT 1];
         Contact a = [SELECT Id FROM Contact WHERE Email = 'wejnwe@aownoi.com' LIMIT 1];
         
-/*
-        Order oldOrder = new Order(
-                AccountId = testAccount.Id,
-                EffectiveDate = System.today(),
-                Contact__c = a.Id,
-                Status = 'Order',
-                DiscountRate__c = 2, // Assuming DiscountRate__c is a custom field
-                Pricebook2Id = Test.getStandardPricebookId()
-        );
-        update oldOrder;
+        Test.stopTest();
+        // Asserts or further validations can be performed here
+    }
+    @IsTest
+    static void testOrderInsertio2() { //order update 설정
+        Test.startTest();
+        // Query the test data created by @TestSetup
+        Account testAccount = [SELECT Id FROM Account WHERE Name = 'Test Account' LIMIT 1];
+        Contact a = [SELECT Id FROM Contact WHERE Email = 'wejnwe@aownoi.com' LIMIT 1];
 
         Test.stopTest();
-*/
-        // Asserts or further validations can be performed here
     }
 }

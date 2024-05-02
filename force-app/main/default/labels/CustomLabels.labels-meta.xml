@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AS</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AS</shortDescription>
+        <value>AS</value>
+    </labels>
+    <labels>
+        <fullName>Accessories</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accessories</shortDescription>
+        <value>Accessories</value>
+    </labels>
+    <labels>
+        <fullName>Account_Name</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Account</shortDescription>
+        <value>Account</value>
+    </labels>
+    <labels>
+        <fullName>Asset</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Asset</shortDescription>
+        <value>Asset</value>
+    </labels>
+    <labels>
+        <fullName>Asset_Name</fullName>
+        <categories>Asset</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Asset Name</shortDescription>
+        <value>Asset Name</value>
+    </labels>
+    <labels>
+        <fullName>Assets</fullName>
+        <categories>ContactAsset LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Assets</shortDescription>
+        <value>Assets</value>
+    </labels>
+    <labels>
+        <fullName>Both_returning_and_first_time_visit_information_has_been_entered</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Both returning and first-time visit information has been entered.</shortDescription>
+        <value>Both returning and first-time visit information has been entered.</value>
+    </labels>
+    <labels>
+        <fullName>COM_LAB_NAME</fullName>
+        <categories>COM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>COM_LAB_NAME</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>COM_LAB_PHONE</fullName>
+        <categories>COM</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>COM_LAB_PHONE</shortDescription>
+        <value>Phone</value>
+    </labels>
+    <labels>
+        <fullName>COM_PHONE_VALIDATION</fullName>
+        <categories>Contact</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>COM_PHONE_VALIDATION</shortDescription>
+        <value>Phone number already has been</value>
+    </labels>
+    <labels>
+        <fullName>Cancellation</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancellation</shortDescription>
+        <value>Cancellation</value>
+    </labels>
+    <labels>
+        <fullName>Close_Date</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Close Date</shortDescription>
+        <value>Close Date</value>
+    </labels>
+    <labels>
+        <fullName>Complex_functionality</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Complex functionality</shortDescription>
+        <value>Advanced Features</value>
+    </labels>
+    <labels>
+        <fullName>Consultation_Name</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Consultation Name</shortDescription>
+        <value>Consultation Name</value>
+    </labels>
+    <labels>
+        <fullName>Contact</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact</shortDescription>
+        <value>Contact</value>
+    </labels>
+    <labels>
+        <fullName>Create</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create</shortDescription>
+        <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>CreateOrder</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CreateOrder</shortDescription>
+        <value>Create Order</value>
+    </labels>
+    <labels>
+        <fullName>Create_VOC</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create VOC</shortDescription>
+        <value>Create VOC</value>
+    </labels>
+    <labels>
+        <fullName>CreateanOrder</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Order</shortDescription>
+        <value>Create an Order</value>
+    </labels>
+    <labels>
+        <fullName>DiscountOrderAmount</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Discount Order Amount</shortDescription>
+        <value>Discount Order Amount</value>
+    </labels>
+    <labels>
+        <fullName>DiscountRateA</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Discount Rate</shortDescription>
+        <value>Discount Rate</value>
+    </labels>
+    <labels>
+        <fullName>DiscoutAmount</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiscoutAmount</shortDescription>
+        <value>Discounted Amount</value>
+    </labels>
+    <labels>
+        <fullName>Email</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>Enter_phone_number</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter phone number</shortDescription>
+        <value>Enter phone number</value>
+    </labels>
+    <labels>
+        <fullName>ErrorSearchMessage</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ErrorSearchMessage</shortDescription>
+        <value>There are no contacts for searching result</value>
+    </labels>
+    <labels>
+        <fullName>Existing_problem</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Existing problem</shortDescription>
+        <value>Past Issue</value>
+    </labels>
+    <labels>
+        <fullName>FinalPrice</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FinalPrice</shortDescription>
+        <value>Final Price</value>
+    </labels>
+    <labels>
+        <fullName>First_Name</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>First Name</shortDescription>
+        <value>First Name</value>
+    </labels>
+    <labels>
+        <fullName>Free_Repair</fullName>
+        <categories>Asset</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Free Repair</shortDescription>
+        <value>Free Repair</value>
+    </labels>
+    <labels>
+        <fullName>HQ_Team</fullName>
+        <categories>Profile</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HQ Team</shortDescription>
+        <value>HQ Team</value>
+    </labels>
+    <labels>
+        <fullName>Instructions_not_clear</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Instructions not clear</shortDescription>
+        <value>etc</value>
+    </labels>
+    <labels>
+        <fullName>Laptop</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Laptop</shortDescription>
+        <value>Laptop</value>
+    </labels>
+    <labels>
+        <fullName>Last_Name</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last Name</shortDescription>
+        <value>Last Name</value>
+    </labels>
+    <labels>
+        <fullName>MaxDiscountRate</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MaxDiscountRate</shortDescription>
+        <value>The maximum discount rate is 20%.</value>
+    </labels>
+    <labels>
+        <fullName>MinDiscountRate</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MinDiscountRate</shortDescription>
+        <value>The minimum discount rate is 0%.</value>
+    </labels>
+    <labels>
+        <fullName>New_problem</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New problem</shortDescription>
+        <value>New problem</value>
+    </labels>
+    <labels>
+        <fullName>No_Permission</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Permission</shortDescription>
+        <value>There are no permission to use this component</value>
+    </labels>
+    <labels>
+        <fullName>Order</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Order</shortDescription>
+        <value>Order</value>
+    </labels>
+    <labels>
+        <fullName>OrderDate</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Order Date</shortDescription>
+        <value>Order Date</value>
+    </labels>
+    <labels>
+        <fullName>OrderDateA</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Order Date</shortDescription>
+        <value>Order Date</value>
+    </labels>
+    <labels>
+        <fullName>OrderDescription</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OrderDescription</shortDescription>
+        <value>Order Description</value>
+    </labels>
+    <labels>
+        <fullName>OrderNumber</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OrderNumber</shortDescription>
+        <value>Order Number</value>
+    </labels>
+    <labels>
+        <fullName>Orders</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Orders</shortDescription>
+        <value>Orders</value>
+    </labels>
+    <labels>
+        <fullName>Paid_Repair</fullName>
+        <categories>Asset</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Paid Repair</shortDescription>
+        <value>Paid Repair</value>
+    </labels>
+    <labels>
+        <fullName>Payment</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment</shortDescription>
+        <value>Payment</value>
+    </labels>
+    <labels>
+        <fullName>PaymentMethod</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PaymentMethod</shortDescription>
+        <value>Payment Method</value>
+    </labels>
+    <labels>
+        <fullName>Phone</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone</shortDescription>
+        <value>Phone</value>
+    </labels>
+    <labels>
+        <fullName>Please_enter_all_of_your_customer_information</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please enter all of your customer information</shortDescription>
+        <value>Please enter all of your customer information</value>
+    </labels>
+    <labels>
+        <fullName>Price</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price</shortDescription>
+        <value>Price</value>
+    </labels>
+    <labels>
+        <fullName>Product</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Product</shortDescription>
+        <value>Product</value>
+    </labels>
+    <labels>
+        <fullName>ProductCode</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProductCode</shortDescription>
+        <value>Product Code</value>
+    </labels>
+    <labels>
+        <fullName>ProductFamily</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProductFamily</shortDescription>
+        <value>Family</value>
+    </labels>
+    <labels>
+        <fullName>ProductName</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProductName</shortDescription>
+        <value>Product Name</value>
+    </labels>
+    <labels>
+        <fullName>PurchaseDate</fullName>
+        <categories>Asset</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PurchaseDate</shortDescription>
+        <value>PurchaseDate</value>
+    </labels>
+    <labels>
+        <fullName>QuantityA</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quantity</shortDescription>
+        <value>Quantity</value>
+    </labels>
+    <labels>
+        <fullName>Qucik_Create_Oppty</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Qucik Create Con</shortDescription>
+        <value>Qucik Create Consultation</value>
+    </labels>
+    <labels>
+        <fullName>Question</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Question</shortDescription>
+        <value>Question</value>
+    </labels>
+    <labels>
+        <fullName>Refresh</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Refresh</shortDescription>
+        <value>Refresh</value>
+    </labels>
+    <labels>
+        <fullName>Refund_Status</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Refund Status</shortDescription>
+        <value>Refund Status</value>
+    </labels>
+    <labels>
+        <fullName>Replaceable_Date</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Replaceable Date</shortDescription>
+        <value>Replaceable Date</value>
+    </labels>
+    <labels>
+        <fullName>Replaceable_Free_Repair</fullName>
+        <categories>Asset</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Replaceable/Free Repair</shortDescription>
+        <value>Replaceable/Free Repair</value>
+    </labels>
+    <labels>
+        <fullName>Replacement</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Replacement</shortDescription>
+        <value>Replacement</value>
+    </labels>
+    <labels>
+        <fullName>Required_fields_not_filled_in</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required fields not filled in</shortDescription>
+        <value>Required fields not filled in</value>
+    </labels>
+    <labels>
+        <fullName>SYSTEM_ADMIN</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SYSTEM ADMIN</shortDescription>
+        <value>System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>Save</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Search</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>SelectPayment</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SelectPayment</shortDescription>
+        <value>Please select a payment method.</value>
+    </labels>
+    <labels>
+        <fullName>SelectProduct</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SelectProduct</shortDescription>
+        <value>Select Product</value>
+    </labels>
+    <labels>
+        <fullName>Select_Exisitng_Customer</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Exisitng Customer</shortDescription>
+        <value>Select Contact</value>
+    </labels>
+    <labels>
+        <fullName>SelectaProduct</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SelectaProduct</shortDescription>
+        <value>Select a product.</value>
+    </labels>
+    <labels>
+        <fullName>Serch_contact_below</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search contact below</shortDescription>
+        <value>Search contact in the search box below</value>
+    </labels>
+    <labels>
+        <fullName>SerialNumber</fullName>
+        <categories>Asset</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SerialNumber</shortDescription>
+        <value>SerialNumber</value>
+    </labels>
+    <labels>
+        <fullName>System_Administrator</fullName>
+        <categories>Profile</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>System Administrator</shortDescription>
+        <value>System Administrator</value>
+    </labels>
+    <labels>
+        <fullName>TotalPrice</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TotalPrice</shortDescription>
+        <value>Total Price</value>
+    </labels>
+    <labels>
+        <fullName>UnitPriceA</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Unit Price</shortDescription>
+        <value>Unit Price</value>
+    </labels>
+    <labels>
+        <fullName>User_didn_t_attend_training</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User didn&apos;t attend training</shortDescription>
+        <value>Non-educated</value>
+    </labels>
+    <labels>
+        <fullName>VOC_Information</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VOC Information</shortDescription>
+        <value>Choose a asset for VOC</value>
+    </labels>
+    <labels>
+        <fullName>ViewAssets</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>View Assets</shortDescription>
+        <value>View Assets</value>
+    </labels>
+    <labels>
+        <fullName>Warranty_Information</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Warranty Information</shortDescription>
+        <value>Laptop Warranty is 2years. Accessory Warranty is 1years.</value>
+    </labels>
+    <labels>
+        <fullName>Warranty_Period</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Warranty Period</shortDescription>
+        <value>Warranty Period</value>
+    </labels>
+    <labels>
+        <fullName>Warranty_Status</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Warranty Status</shortDescription>
+        <value>Warranty Status</value>
+    </labels>
+    <labels>
+        <fullName>addProduct</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>addProduct</shortDescription>
+        <value>Add Product</value>
+    </labels>
+    <labels>
+        <fullName>caseCreatedDate</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>caseCreatedDate</shortDescription>
+        <value>CreatedDate</value>
+    </labels>
+    <labels>
+        <fullName>caseDescription</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>caseDescription</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>caseReason</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>caseReason</shortDescription>
+        <value>Reason</value>
+    </labels>
+    <labels>
+        <fullName>caseStatus</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>caseStatus</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>caseSubject</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>caseSubject</shortDescription>
+        <value>Subject</value>
+    </labels>
+    <labels>
+        <fullName>caseType</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>caseType</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>createError</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>createError</shortDescription>
+        <value>VoC was not created</value>
+    </labels>
+    <labels>
+        <fullName>createSuccess</fullName>
+        <categories>VOC LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>createSuccess</shortDescription>
+        <value>Successfully VoC was creaeted</value>
+    </labels>
+    <labels>
+        <fullName>new_customer_info</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>new customer info</shortDescription>
+        <value>Create New Contact</value>
+    </labels>
+    <labels>
+        <fullName>not_purchased</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>not-purchased</shortDescription>
+        <value>not-purchased</value>
+    </labels>
+    <labels>
+        <fullName>oppOrder</fullName>
+        <categories>Opp Lwc</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>oppOrder</shortDescription>
+        <value>Order</value>
+    </labels>
+    <labels>
+        <fullName>purchased</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>purchased</shortDescription>
+        <value>purchased</value>
+    </labels>
+    <labels>
+        <fullName>searchPlaceholder</fullName>
+        <categories>ContactAsset LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>searchPlaceholder</shortDescription>
+        <value>Enter things to search</value>
+    </labels>
+    <labels>
+        <fullName>selectConsultation</fullName>
+        <categories>Order LWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>select Oppty</shortDescription>
+        <value>select a Consultation.</value>
+    </labels>
+    <labels>
+        <fullName>typeInCard</fullName>
+        <categories>UtilityBarLWC</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>typeInCard</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>vocMessage</fullName>
+        <categories>Asset</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>vocMessage</shortDescription>
+        <value>Choose a asset for VoC</value>
+    </labels>
+</CustomLabels>

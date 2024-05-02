@@ -411,7 +411,7 @@ export default class OrderCreate extends NavigationMixin(LightningElement) {
         else {
             this.discountRate=Math.floor(Number(this.discountRate)); //소수점 제거
         }
-        if(!this.orderDate.reportValidity()){
+        if(this.orderDate==null || this.orderDate==''){
             this.showToast('Error', '주문 날짜를 입력해주세요.', 'error');
             return; 
         }

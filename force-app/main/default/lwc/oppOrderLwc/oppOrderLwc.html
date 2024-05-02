@@ -16,13 +16,13 @@
                     <p style="font-size:15px">
                         <lightning-icon icon-name="standard:orders"
                                         size="small"></lightning-icon>
-                        <strong> Orders ({orderCount})</strong></p>
+                        <strong> {label.Orders} ({orderCount})</strong></p>
             </lightning-layout>
         </div>
         <lightning-datatable
                 key-field="id"
                 data={orders}
-                onrowaction={OrderNumORAsset}
+                onrowaction={orderNumORAsset}
                 columns={columns}
                 show-row-number-column
                 row-number-offset="0"

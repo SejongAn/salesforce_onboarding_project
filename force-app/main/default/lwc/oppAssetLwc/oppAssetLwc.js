@@ -25,11 +25,11 @@ import Refund_Status from '@salesforce/label/c.Refund_Status';
 const COLUMNS = [
     { label: Asset_Name, fieldName: 'Name', type: 'button',
         typeAttributes: { label: { fieldName: 'Name' }, variant: 'base' }},
-    { label: 'Purchase Date', fieldName: 'PurchaseDate', type: 'Date',
+    { label: PurchaseDate, fieldName: 'PurchaseDate', type: 'Date',
         cellAttributes: { alignment: 'center' }, fixedWidth: 150},
-    { label: 'Warranty Status', fieldName: 'Warranty_status__c', type: 'Formula',
+    { label: Warranty_Status, fieldName: 'Warranty_status__c', type: 'Formula',
         cellAttributes: { alignment: 'center' }, fixedWidth: 170},
-    { label: 'Refund Status', fieldName: 'Refund_availability__c', type: 'Checkbox',
+    { label: Refund_Status, fieldName: 'Refund_availability__c', type: 'Checkbox',
         cellAttributes: { alignment: 'center' }, fixedWidth: 150}
 ];
 
@@ -37,16 +37,9 @@ export default class OppAssetLwc extends NavigationMixin(LightningElement) {
 
     label = { Assets, Asset_Name, PurchaseDate, Warranty_Status, Refund_Status  };
 
-    @track asset = {
-        Name: '',
-        PurchaseDate: '',
-        Warranty_End_Date__c: '',
-        Refund_availability__c: ''
-    };
-
     @track assetCount = 0; // 자산 개수 초기화
     @track showNoOrdersMessage = false; // 데이터가 없을 때 메시지를 표시할지 결정하는 변수
-    assets;
+    @track assets;
     columns = COLUMNS;
 
     _orderId; // 내부적으로 사용할 orderId
@@ -78,7 +71,7 @@ export default class OppAssetLwc extends NavigationMixin(LightningElement) {
             console.log(this.orderId);
             this.assets = data;
             this.assetCount = data.length;
-            this.showNoOrdersMessage = data.length === 0; // 데이터가 없으면 true로 설정
+            // this.showNoOrdersMessage = data.length === 0; // 데이터가 없으면 true로 설정
 
 
         } else if (error) {

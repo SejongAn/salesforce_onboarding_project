@@ -1,0 +1,18 @@
+<!--
+ - Created by nate on 5/2/24.
+ -->
+
+<!-- Opp Prdt Ranking Repeat Code -->
+<template>
+    <div class="slds-m-bottom_xx-small slds-p-vertical_x-small slds-border_right custom-background">
+        <h3 class="slds-text-align_center slds-text-color_inverse"> Top5 {tableTitle}</h3>
+    </div>
+    <lightning-datatable
+            key-field="Id"
+            data={tableData}
+            show-row-number-column
+            row-number-offset="0"
+            columns={columns}
+            hide-checkbox-column>
+    </lightning-datatable>
+</template>

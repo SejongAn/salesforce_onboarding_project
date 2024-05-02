@@ -19,7 +19,8 @@ public class Contact_tr_ts {
 
     @isTest
     static void runPositiveTestCases(){
-        User u1 = [Select Id From User WHere ProfileId ='00eIT000000fWwG' limit 1];
+        Profile p = [SELECT ID FROM PROFILE Where Name ='Sales Team'];
+        User u1 = [Select Id From User WHere ProfileId = :p.id limit 1];
 
         System.debug('validate rusAs');
         System.runAs(u1){

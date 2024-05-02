@@ -19,38 +19,46 @@
                 TOP5 {label.Product}
             </p>
         </lightning-layout>
-        <div class="slds-grid slds-wrap">
+        <lightning-layout class= "slds-grid_align-space">
             <!-- 좌측 lightning-datatable -->
-            <div class="slds-col slds-size_1-of-2">
-                <!-- 좌측 테이블 제목 -->
-                <div class="slds-m-bottom_small slds-border_right" style="padding:0.5rem;background:#9798a3">
-                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 {label.Laptop}</h3>
-                </div>
-                <lightning-datatable
-                        key-field="Id"
-                        data={topLaptops}
-                        show-row-number-column
-                        row-number-offset="0"
-                        columns={columns}
-                        hide-checkbox-column>
-                </lightning-datatable>
-            </div>
+            <lightning-layout-item size= "6">
+<!--                 좌측 테이블 제목 -->
+<!--                <div class="slds-m-bottom_xx-small slds-p-vertical_x-small slds-border_right custom-background">-->
+<!--                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 {label.Laptop}</h3>-->
+<!--                </div>-->
+<!--                <lightning-datatable-->
+<!--                        key-field="Id"-->
+<!--                        data={topLaptops}-->
+<!--                        show-row-number-column-->
+<!--                        row-number-offset="0"-->
+<!--                        columns={columns}-->
+<!--                        hide-checkbox-column>-->
+<!--                </lightning-datatable>-->
+                <c-opp-prdt-ranking-repeat-code table-title={label.Laptop}
+                                                table-data={topLaptops}
+                                                columns={columns}>
+                </c-opp-prdt-ranking-repeat-code>
+            </lightning-layout-item>
 
             <!-- 우측 lightning-datatable -->
-            <div class="slds-col slds-size_1-of-2">
+            <lightning-layout-item size= "6">
                 <!-- 우측 테이블 제목 -->
-                <div class="slds-m-bottom_small" style="padding:0.5rem;background:#9798a3">
-                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 {label.Accessories}</h3>
-                </div>
-                <lightning-datatable
-                        key-field="Id"
-                        data={topAccessories}
-                        show-row-number-column
-                        row-number-offset="0"
-                        columns={columns}
-                        hide-checkbox-column>
-                </lightning-datatable>
-            </div>
-        </div>
+<!--                <div class="slds-m-bottom_small slds-p-vertical_x-small custom-background">-->
+<!--                    <h3 class="slds-text-align_center slds-text-color_inverse">Top5 {label.Accessories}</h3>-->
+<!--                </div>-->
+<!--                <lightning-datatable-->
+<!--                        key-field="Id"-->
+<!--                        data={topAccessories}-->
+<!--                        show-row-number-column-->
+<!--                        row-number-offset="0"-->
+<!--                        columns={columns}-->
+<!--                        hide-checkbox-column>-->
+<!--                </lightning-datatable>-->
+                <c-opp-prdt-ranking-repeat-code table-title={label.Accessories}
+                                                table-data={topAccessories}
+                                                columns={columns}>
+                </c-opp-prdt-ranking-repeat-code>
+            </lightning-layout-item>
+        </lightning-layout>
     </lightning-card>
 </template>

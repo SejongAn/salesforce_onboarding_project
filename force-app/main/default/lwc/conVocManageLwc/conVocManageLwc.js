@@ -91,6 +91,10 @@ export default class ConVocManageLwc extends NavigationMixin(LightningElement) {
 
     handleMessage(message) {
         this.caseAssetId = message.recordId;
+        this.typeValue = null;
+        this.reasonValue = null;
+        this.Subject = null;
+        this.Description = null;
     }
 
     disconnectedCallback() {
@@ -112,6 +116,7 @@ export default class ConVocManageLwc extends NavigationMixin(LightningElement) {
                 Warranty_status__c: assetRecord.Warranty_status__c.value,
                 ContactId: assetRecord.ContactId.value
             };
+
         } else if (error) {
             console.error('error', error);
         }

@@ -35,9 +35,6 @@ export default class ConBaseLwc extends NavigationMixin(LightningElement) {
         if (this.phoneNum != '') {
             let searchNum = this.phoneNum.replace(/[^0-9]/g, '');
             searchPhone({searchNum: searchNum}).then(result => {
-                if (result.length == 0) {
-                    console.log('search fail');
-                } else {
                     const contacts = result.map(contact => {           
                         return {
                             Id: contact.Id,
@@ -48,12 +45,13 @@ export default class ConBaseLwc extends NavigationMixin(LightningElement) {
                     });
                     this.result = contacts;
                     this.error = undefined;
-                }
             }).catch(error => {
-                console.log('error');
                 this.result = undefined;
                 this.error = error;
             });
+        } else {
+            this.result = undefined;
+            this.error = undefined;
         }
     }
 

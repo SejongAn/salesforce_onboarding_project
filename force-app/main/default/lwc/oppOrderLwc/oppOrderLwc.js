@@ -14,28 +14,29 @@ import getOrders from '@salesforce/apex/OppGetOrderAsset.getOrders';
 import { publish, MessageContext } from 'lightning/messageService';
 import { NavigationMixin } from 'lightning/navigation';
 import OrderAssetMessageChannel from '@salesforce/messageChannel/OrderAssetMessageChannel__c';
+import Orders from '@salesforce/label/c.Orders';
 import OrderNumber from '@salesforce/label/c.OrderNumber';
-import Order from '@salesforce/label/c.Order';
 import OrderDate from '@salesforce/label/c.OrderDate';
 import DiscountOrderAmount from '@salesforce/label/c.DiscountOrderAmount';
 import Payment from '@salesforce/label/c.Payment';
+import ViewAssets from '@salesforce/label/c.ViewAssets';
 
 
 const COLUMNS = [
-    { label: 'Order Number', fieldName: 'OrderNumber', type: 'button', cellAttributes: { alignment: 'center' },
+    { label: OrderNumber, fieldName: 'OrderNumber', type: 'button', cellAttributes: { alignment: 'center' },
         typeAttributes: {
             label: { fieldName: 'OrderNumber' }, // OrderNumber 값을 버튼의 라벨로 사용합니다.
             name: 'OrderNo', // OrderNumORAsset 함수에서 action.name을 통해 이 값을 확인합니다.
             title: 'View Order',
             variant: 'base'
         }},
-    { label: 'Discount Order Amount', fieldName: 'Discount_Order_Amount__c', type: 'currency' },
-    { label: 'Order Date', fieldName: 'EffectiveDate', type: 'Date', cellAttributes: { alignment: 'center' }, fixedWidth: 130 },
-    { label: 'Payment', fieldName: 'Payment__c', type: 'Picklist', cellAttributes: { alignment: 'center' }, fixedWidth: 110 },
+    { label: DiscountOrderAmount, fieldName: 'Discount_Order_Amount__c', type: 'currency' },
+    { label: OrderDate, fieldName: 'EffectiveDate', type: 'Date', cellAttributes: { alignment: 'center' }, fixedWidth: 130 },
+    { label: Payment, fieldName: 'Payment__c', type: 'Picklist', cellAttributes: { alignment: 'center' }, fixedWidth: 110 },
     {
         type: 'button',  fixedWidth: 130,
         typeAttributes: {
-            label: 'View Assets',
+            label: ViewAssets,
             name: 'view_asset',
             title: 'View Asset'
             // variant: 'brand'
@@ -46,12 +47,12 @@ const COLUMNS = [
 
 export default class OppOrderLwc extends NavigationMixin(LightningElement) {
 
-    label = { Order, OrderNumber, DiscountOrderAmount, OrderDate, Payment  };
+    label = { Orders, OrderNumber, DiscountOrderAmount, OrderDate, Payment  };
 
     @api recordId;
-    @track orderCount = 0; // 주문 개수 초기화
+    orderCount = 0; // 주문 개수 초기화
     @track orders = [];
-    @track showNoOrdersMessage = false; // 데이터가 없을 때 메시지를 표시할지 결정하는 변수
+    showNoOrdersMessage = false; // 데이터가 없을 때 메시지를 표시할지 결정하는 변수
     columns = COLUMNS;
 
     @wire(MessageContext)
@@ -70,7 +71,7 @@ export default class OppOrderLwc extends NavigationMixin(LightningElement) {
     }
 
     // datatable상 같은 행에서 발생시키는 2가지 rowaction을 event 별로 다른 action 실행 (아래 참조)
-    OrderNumORAsset(event){
+    orderNumORAsset(event){
         console.log(event.detail.action.name);
         const actionName = event.detail.action.name; // 버튼의 이름을 가져옵니다.
         if (actionName === 'OrderNo') {

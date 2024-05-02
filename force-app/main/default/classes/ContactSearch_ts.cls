@@ -8,7 +8,10 @@
 * Ver  Date        Author            Modification
 * ===============================================================
 * 1.0  2024.04.29  Yeongeun Kim     create
+* 1.1  2024.05.02  Sejong An        Add searchPhoneWithOffsetTest1 method for searchPhoneWithOffset method test
 ********************************************************************************/
+
+
 @IsTest
 public with sharing class ContactSearch_ts {
     @TestSetup
@@ -28,8 +31,12 @@ public with sharing class ContactSearch_ts {
     }
 
     @IsTest
-    static void negativeTest(){
-        List<Contact> contacts = ContactSearch.searchPhone('8888');
-        system.assertEquals(contacts,null);
+    static void searchPhoneWithOffsetTest1(){
+        List<ContactSearch.ContactWrapper> contacts = ContactSearch.searchPhoneWithOffset('7777',1,5);
+        for(ContactSearch.ContactWrapper c : contacts){
+            system.assertEquals('name',c.Name);
+        }
     }
+
+
 }
