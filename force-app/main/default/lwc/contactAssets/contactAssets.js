@@ -112,7 +112,7 @@ export default class ContactAssets extends NavigationMixin(LightningElement) {
     doVoc(){
         if(this.selectedRow != ''){
             const caseAssetId = this.selectedRow;
-            const messagePayload = { recordId: caseAssetId };
+            const messagePayload = {caseAssetId};
             publish(this.messageContext, VOC_ASSET_CHANNEL, messagePayload);
         } else{
             this.showToast("Error", vocMessage,"error");

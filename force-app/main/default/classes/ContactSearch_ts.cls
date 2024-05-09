@@ -32,11 +32,17 @@ public with sharing class ContactSearch_ts {
 
     @IsTest
     static void searchPhoneWithOffsetTest1(){
-        List<ContactSearch.ContactWrapper> contacts = ContactSearch.searchPhoneWithOffset('7777',1,5);
+        List<ContactSearch.ContactWrapper> contacts = ContactSearch.searchPhoneWithOffset('7777',0,5);
         for(ContactSearch.ContactWrapper c : contacts){
             system.assertEquals('name',c.Name);
         }
     }
 
-
+    @IsTest
+    static void searchPhoneWithOffsetTest3(){
+        List<ContactSearch.ContactWrapper> contacts = ContactSearch.searchPhoneWithOffset('7777',2,5);
+        for(ContactSearch.ContactWrapper c : contacts){
+            system.assertEquals('name',c.Name);
+        }
+    }
 }

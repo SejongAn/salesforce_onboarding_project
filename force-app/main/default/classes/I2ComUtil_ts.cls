@@ -10,6 +10,13 @@
 // ********************************************************************************-->
 @IsTest
 private class I2ComUtil_ts {
+
+    @TestSetup
+    static void setup(){
+        Contact con = new Contact(LastName='kim',Phone='010-2345-2312');
+        insert con;
+    }
+
     @IsTest
     static void getRecordTypeId() {
         String recordTypeId = I2ComUtil.getRecordTypeId('Opportunity','SimpleOppty');
@@ -30,6 +37,13 @@ private class I2ComUtil_ts {
         set<String> fieldSet1 = I2ComUtil.checkRequiredField('Account');
 
         System.assertEquals(true,fieldSet1.contains('name'));
+    }
+
+    //public static Integer getNumberOfObject(String objectName, String fieldName, String searchWord)
+    @IsTest
+    static void  getNumberOfObjectTest(){
+        Integer num = I2ComUtil.getNumberOfObject('Contact','Phone','010');
+        System.assertEquals(1,num);
 
     }
 }

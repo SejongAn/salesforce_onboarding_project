@@ -34,8 +34,6 @@ public without sharing class OppTopProductController {
     @AuraEnabled(cacheable=true)
     public static List<ProductInfo> getTopProducts(String oppId) {
 
-        System.debug('sdfa');
-
         String accountType = getAccountType(oppId); // 상담지점의 국가 저장
         List<String> PdtFamily = new List<String>{'laptop', 'accessory'};
         List<ProductInfo> ProductInfosToJs = new List<ProductInfo>();
@@ -50,7 +48,7 @@ public without sharing class OppTopProductController {
                     ORDER BY COUNT(Id) DESC
                     LIMIT 5
             ];
-
+            System.debug(topProduct);
             // 상위 5위 판매제품에 대한 Id값 가져오기
             List<Id> topIds = new List<Id>();
             for (AggregateResult ar : topProduct) {
@@ -73,17 +71,26 @@ public without sharing class OppTopProductController {
                 }
             }
 
-
+            System.debug(products);
             // 사용자의 통화 설정에 따라 알맞는 Price book entry에 접근하여 가격정보를 가져와 Map 형태로 저장
             Map<Id, Decimal> productPrices = new Map<Id, Decimal>();
-            String currencyCode = UserInfo.getDefaultCurrency();
+          String currencyCode = UserInfo.getDefaultCurrency();
+//            Opportunity oppforCurrency = [SELECT Id, CurrencyIsoCode FROM Opportunity WHERE Id =: oppId];
+//            String currencyCode = oppforCurrency.CurrencyIsoCode;
+
+            System.debug(22);
+
+
             for (PriceBookEntry pbe : [
                     SELECT Product2Id, UnitPrice
                     FROM PriceBookEntry
                     WHERE Product2Id IN :topIds AND Pricebook2.IsActive = true AND CurrencyIsoCode = :currencyCode
             ]) {
                 productPrices.put(pbe.Product2Id, pbe.UnitPrice);
+                System.debug('count' + Limits.getQueries());
             }
+
+            System.debug(productPrices);
 
             // 앞서 저장한 Product 와 Price를 초반에 설정한 ProductInfo 형태로 담아 반환
             for (Product2 product : products) {

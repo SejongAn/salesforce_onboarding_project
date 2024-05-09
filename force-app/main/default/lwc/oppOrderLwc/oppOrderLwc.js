@@ -14,6 +14,7 @@ import getOrders from '@salesforce/apex/OppGetOrderAsset.getOrders';
 import { publish, MessageContext } from 'lightning/messageService';
 import { NavigationMixin } from 'lightning/navigation';
 import OrderAssetMessageChannel from '@salesforce/messageChannel/OrderAssetMessageChannel__c';
+//custom label
 import Orders from '@salesforce/label/c.Orders';
 import OrderNumber from '@salesforce/label/c.OrderNumber';
 import OrderDate from '@salesforce/label/c.OrderDate';

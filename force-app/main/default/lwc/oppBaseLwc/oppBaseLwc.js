@@ -279,15 +279,11 @@ export default class OpportunityForm extends LightningElement {
     //pageNum기준으로 연락처 검색
     searchContact(){
         this.displayConList=true; //검색 결과(Contact datatable,pagenation button 표시)
-        if(this.pageNum<1){ //감소된 pageNum이 0이라면(0페이지는 없음)
-            this.pageNum=1; //pageNum+1로 1페이지 표시하게 함
-        }
         if(this.phoneNum){ //phoneNum가 입력되어 있다면
             let searchNum = this.phoneNum.replace(/[^0-9]/g, '');
             searchPhoneWithOffset({searchNum:searchNum, pageNum:this.pageNum, recordPerPage:this.recordPerPage}).then(result => {
                 if(result.length == 0){ //검색 된 값이 없다면
                     console.log('search fail');
-                    this.pageNum-=1;
                 } 
                 if(result) {
                     const contacts = result.map(contact => {
@@ -298,7 +294,8 @@ export default class OpportunityForm extends LightningElement {
                             Phone: contact.Phone,
                             Type__c: (contact.Type === 'purchased') ? purchased : not_purchased   
                         };   
-                    });                    
+                    });
+                    this.pageNum=result[0].pageNum;
                     this.result = contacts;
                     this.error = undefined;
                 }

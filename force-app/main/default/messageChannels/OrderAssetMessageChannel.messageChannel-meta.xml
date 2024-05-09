@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This is a sample Lightning Message Channel.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>This is data parameter that you want to send through LMS</description>
+        <fieldName>orderId</fieldName>
+    </lightningMessageFields>
+    <masterLabel>OrderAssetMessageChannel</masterLabel>
+</LightningMessageChannel>

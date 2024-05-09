@@ -8,6 +8,8 @@
 //* Ver  Date        Author            Modification
 //* ===============================================================
 //* 1.0  2024.04.30  Sejong An         Create
+//* 1.1  2024.05.02  Sejong An         Add checkRequiredField Method
+//* 1.2  2024.05.03  Sejong An         Add getNumberOfObject Method
 //********************************************************************************-->
 public inherited sharing class I2ComUtil {
 
@@ -51,6 +53,14 @@ public inherited sharing class I2ComUtil {
             }
         }
         return results;
+    }
 
+    //입력된 객체, 필드이름, 필드에 Like로 걸릴 조건에 맞는 데이터의 총 갯수 반환
+    public static Integer getNumberOfObject(String objectName, String fieldName, String searchWord){
+        String searchPattern = '%' + searchWord + '%';
+        String queryString = 'SELECT COUNT(Id) num FROM ' + objectName + ' WHERE '+ fieldName + ' LIKE :searchPattern';
+        List<AggregateResult> results = Database.query(queryString);
+        System.debug((Integer)results[0].get('num'));
+        return (Integer)results[0].get('num');
     }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <description>when case is created, plus one to count of case field in contact.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>addCount</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Contact.Count_Of_Case__c}+1</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Add count of case {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Add count of case</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Contact_Record</name>
+        <label>Update Contact Record</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <inputAssignments>
+            <field>Count_Of_Case__c</field>
+            <value>
+                <elementReference>addCount</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.Contact</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Contact_Record</targetReference>
+        </connector>
+        <object>Case</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
